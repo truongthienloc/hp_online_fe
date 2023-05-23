@@ -2,7 +2,11 @@ function Introduce() {
     return (
         <div className="w-full h-[80vh] pt-[100px] mb-[100px]">
             <div className="flex flex-row w-full items-center">
-                <div className="flex-1 flex-col">
+                <div
+                    className="flex-1 flex-col"
+                    data-aos="fade-up"
+                    data-aos-duration="1000"
+                >
                     <h1 className="w-full text-center font-bold text-5xl mb-2 text-[#004aad]">
                         HEALTHCARE & PHARMACY ONLINE
                     </h1>

@@ -47,7 +47,7 @@ interface IntroProps {
 
 const IntroBlock = ({ srcImage, alt, title, content }: IntroProps) => {
     return (
-        <div className="flex-1 flex flex-col gap-3">
+        <div className="flex-1 flex flex-col gap-3" data-aos="zoom-in">
             <div className="w-full flex flex-col items-center">
                 <img className="object-cover h-32" src={srcImage} alt={alt} />
             </div>
