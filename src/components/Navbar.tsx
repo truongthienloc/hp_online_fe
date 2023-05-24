@@ -3,7 +3,7 @@ import Head from 'next/head';
 
 function Navbar() {
     return (
-        <nav className="w-full h-[60px] flex flex-row gap-16 bg-primary fixed shadow">
+        <nav className="w-full h-[60px] flex flex-row gap-16 bg-primary fixed shadow z-10">
             <Head key={'navbar'}>
                 <link
                     rel="stylesheet"

@@ -9,6 +9,7 @@ import 'aos/dist/aos.css';
 import Introduce from '~/components/Homepage/Introduce';
 import Solutions from '~/components/Homepage/Solutions';
 import DoctorsIntro from '~/components/Homepage/DoctorsIntro';
+import ResultIntro from '~/components/Homepage/ResultIntro';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,6 +24,7 @@ export default function Home() {
         >
             <Introduce />
             <Solutions />
+            <ResultIntro />
             <DoctorsIntro />
         </main>
     );

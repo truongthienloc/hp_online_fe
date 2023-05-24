@@ -2,10 +2,22 @@ function DoctorsIntro() {
     return (
         <div>
             <DoctorIntro
-                title="Bác sĩ tim mạch"
+                title="Chuyên viên tâm lí"
                 name="Trương Thiên Lộc"
                 description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta earum aperiam harum, eius magni facere. Optio, ea deserunt, libero, quibusdam necessitatibus sed omnis animi eveniet temporibus iste amet impedit facere."
                 srcImage="images/doctor-01.jpg"
+            />
+            <DoctorIntro
+                title="Tư vấn viên dinh dưỡng"
+                name="Nguyễn Phạm Thiên Phúc"
+                description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta earum aperiam harum, eius magni facere. Optio, ea deserunt, libero, quibusdam necessitatibus sed omnis animi eveniet temporibus iste amet impedit facere."
+                srcImage="images/doctor-02.jpg"
+            />
+            <DoctorIntro
+                title="Bác sĩ tim mạch"
+                name="Lady Girl"
+                description="Bacon ipsum dolor amet meatloaf ribeye ball tip, cow chuck venison pork belly meatball porchetta. Ribeye short loin flank kevin turducken. Strip steak tenderloin biltong shoulder drumstick cow. Cow pork belly jowl meatloaf pig ground round beef tri-tip. Pork chop beef pig pancetta pork loin."
+                srcImage="images/doctor-03.jpg"
             />
         </div>
     );
