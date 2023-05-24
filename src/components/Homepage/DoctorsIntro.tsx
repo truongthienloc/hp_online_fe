@@ -36,12 +36,12 @@ function DoctorIntro({ title, name, description, srcImage }: IDoctorIntroProbs) 
     return (
         <div className="w-full h-[80vh] flex flex-row items-center gap-32 p-8">
             <div
-                className="flex-[3] flex flex-col gap-8 justify-center font-serif"
+                className="flex-[3] flex flex-col gap-8 justify-center font-time-new-roman"
                 data-aos="fade-up"
             >
                 <h2 className="text-2xl font-bold">{title}</h2>
                 <h2 className="font-bold text-5xl">{name}</h2>
-                <p className="text-base text-justify">{description}</p>
+                <p className="text-lg text-justify">{description}</p>
             </div>
             <div className="flex-[2]" data-aos="fade-left">
                 <img src={srcImage} alt={name} />
