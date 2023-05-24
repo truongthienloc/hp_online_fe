@@ -4,13 +4,6 @@ import Head from 'next/head';
 function Navbar() {
     return (
         <nav className="w-full h-[60px] flex flex-row gap-16 bg-primary fixed shadow z-10">
-            <Head key={'navbar'}>
-                <link
-                    rel="stylesheet"
-                    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-                />
-            </Head>
-
             <div className="flex-1 flex justify-center p-1">
                 <Link href="/">
                     <img
