@@ -4,6 +4,7 @@ function BookingPage() {
     return (
         <main className="min-h-screen justify-center p-12 pt-28 flex flex-row gap-8 flex-wrap">
             <DoctorItem
+                id="12345"
                 name="Trương Thiên Lộc"
                 title="Tư vấn viên dinh dưỡng"
                 avatar="images/doctor-01.jpg"

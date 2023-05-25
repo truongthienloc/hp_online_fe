@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Head from 'next/head';
 
 function Navbar() {
     return (
@@ -8,7 +7,7 @@ function Navbar() {
                 <Link href="/">
                     <img
                         className="h-full hover:scale-125 transition"
-                        src="images/Logo HPO.png"
+                        src="/images/Logo HPO.png"
                         alt="Trang chủ"
                     />
                 </Link>
