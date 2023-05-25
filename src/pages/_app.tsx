@@ -1,4 +1,5 @@
 import '~/styles/globals.scss';
+import 'react-toastify/dist/ReactToastify.css';
 import type { AppPropsWithLayout } from '~/types';
 import DefaultLayout from '~/components/Layouts/DefaultLayout';
 import Head from 'next/head';

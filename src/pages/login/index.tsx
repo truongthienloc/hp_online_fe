@@ -1,63 +1,149 @@
+import Link from 'next/link';
+import clsx from 'clsx';
+import React, { useId, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
+import { ToastContainer, toast } from 'react-toastify';
+
+import Axios from '~/utils/Axios';
 import AuthLayout from '~/components/Layouts/AuthLayout';
 import { NextPageWithLayout } from '~/types';
-import React, { useId, useState } from 'react';
+import { FieldValues } from 'react-hook-form/dist/types';
 
 const LoginPage: NextPageWithLayout = () => {
     const emailId = useId();
     const passwordId = useId();
-    const rePasswordId = useId();
+    const [hiddenPassword, setHiddenPassword] = useState(true);
+
+    const router = useRouter();
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
+
+    const onSubmit = async (data: FieldValues) => {
+        try {
+            const res = await Axios({
+                method: 'POST',
+                data: data,
+            });
+
+            const resData = res.data;
+
+            toast.success('Đăng nhập thành công.', {
+                autoClose: 3000,
+                pauseOnHover: false,
+            });
+
+            setTimeout(() => {
+                router.push('/');
+            }, 3000);
+        } catch (error) {
+            toast.error('Đăng nhập thất bại.');
+        }
+    };
+
+    const handleHiddenPassword = (e: React.MouseEvent) => {
+        e.preventDefault();
+        setHiddenPassword((prevState) => !prevState);
+        const inputPassword = document.getElementById(
+            passwordId,
+        ) as HTMLInputElement;
+        inputPassword.focus();
+    };
 
     return (
-        <form className="w-full h-full p-4 pt-12 flex flex-col gap-8">
+        <form
+            className="w-full h-full p-4 pt-12 flex flex-col gap-8"
+            onSubmit={handleSubmit(onSubmit)}
+        >
             <img className="h-20 w-20" src="images/Logo HPO.png" alt="Logo HPO" />
             <h1 className="font-bold text-lg">HEALTHCARE & PHARMACY ONLINE</h1>
+            <h2 className="font-bold text-lg">LOGIN</h2>
             <div className="w-full flex flex-col gap-2">
-                <label className="text-gray-600 font-semibold" htmlFor={emailId}>
+                <label className="text-gray-600 font-bold" htmlFor={emailId}>
                     EMAIL:
                 </label>
-
+                {errors.email && (
+                    <p className="text-red-600">
+                        * {errors.email.message as string}
+                    </p>
+                )}
                 <input
+                    {...register('email', { required: 'Enter your email' })}
                     className="text-base bg-transparent border-b border-black outline-none p-1 focus:border-indigo-900 focus:border-b-2 "
                     type="text"
                     name="email"
                     placeholder="Email"
                     id={emailId}
-                    value={''}
                 />
             </div>
 
             <div className="w-full flex flex-col gap-2">
-                <label className="text-gray-600 font-semibold" htmlFor={''}>
+                <label className="text-gray-600 font-bold" htmlFor={passwordId}>
                     PASSWORD:
                 </label>
-
+                {errors.password && (
+                    <p className="text-red-700">
+                        * {errors.password.message as string}
+                    </p>
+                )}
                 <div className="flex flex-row relative">
                     <input
+                        {...register('password', {
+                            required: 'Enter your password',
+                        })}
                         className="flex-1 text-base bg-transparent border-b border-black outline-none p-1 focus:border-indigo-900 focus:border-b-2 "
-                        type="text"
-                        name="email"
-                        placeholder="Email"
-                        value={''}
+                        type={hiddenPassword ? 'password' : 'text'}
+                        name="password"
+                        placeholder="Password"
+                        id={passwordId}
                     />
-                    <button className="h-full absolute right-1 flex items-center justify-center">
-                        <i className="fa fa-eye"></i>
+                    <button
+                        className="h-full absolute right-1 flex items-center justify-center"
+                        onClick={handleHiddenPassword}
+                    >
+                        <i
+                            className={clsx('fa', {
+                                'fa-eye': hiddenPassword,
+                                'fa-eye-slash': !hiddenPassword,
+                            })}
+                        ></i>
                     </button>
                 </div>
             </div>
 
-            <div className="w-full flex flex-col gap-2">
-                <label className="text-gray-600 font-semibold" htmlFor={''}>
-                    PASSWORD:
-                </label>
+            <button
+                className="h-8 rounded font-bold text-white bg-primary flex items-center justify-center"
+                type="submit"
+            >
+                LOGIN
+            </button>
 
-                <input
-                    className="text-base bg-transparent border-b border-black outline-none p-1 focus:border-indigo-900 focus:border-b-2 "
-                    type="text"
-                    name="email"
-                    placeholder="Email"
-                    value={''}
-                />
+            <div className="flex flex-row justify-center gap-2">
+                <span>Don't have an account?</span>
+                <Link
+                    href={'/register'}
+                    className="text-orange-600 hover:text-violet-700"
+                >
+                    Register now
+                </Link>
             </div>
+
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </form>
     );
 };

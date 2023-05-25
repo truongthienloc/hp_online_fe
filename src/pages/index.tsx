@@ -1,6 +1,4 @@
 import { Inter } from 'next/font/google';
-// import Script from 'next/script';
-import Head from 'next/head';
 import { useEffect } from 'react';
 /**@ts-ignore */
 import AOS from 'aos';
