@@ -1,10 +1,9 @@
 import { NextPage } from "next"
 import Heading from "~/pages/users/heading"
 import Sidebar from "~/pages/users/sidebar"
-interface LayoutProps {
-    children: any
-}
-const Layout : NextPage<LayoutProps> = ({children}) => {
+import { LayoutProbs } from "~/types"
+
+const AdminLayOut : NextPage<LayoutProbs> = ({children} : LayoutProbs) => {
     return (
         <div className="bg-[#f3f4f8]">
             <div className="flex h-screen">
@@ -17,4 +16,4 @@ const Layout : NextPage<LayoutProps> = ({children}) => {
         </div>
     )
 }
-export default Layout
+export default AdminLayOut

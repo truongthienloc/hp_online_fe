@@ -5,7 +5,9 @@ import AllDoctors from './alldoctors'
 import AllSupporters from './allsupporters'
 import Booking from "./booking"
 import UpdatePatient from "./newpatient"
-const Category = () => {
+import { NextPageWithLayout } from "~/types"
+import AdminLayOut from "~/components/Layouts/AdminLayout"
+const Category:NextPageWithLayout = () => {
     const router = useRouter()
     const {category} = router.query
     return (
@@ -17,6 +19,11 @@ const Category = () => {
             category === 'Booking' ? <Booking/> : 
             category === 'Newpatient' ? <UpdatePatient/> : '' }
         </div>
+    )
+}
+Category.getLayout = (page:React.ReactElement) => {
+    return (
+        <AdminLayOut>{page}</AdminLayOut>
     )
 }
 export default Category
