@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import React, { useId, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
+import { hasCookie } from 'cookies-next';
 import { ToastContainer, toast } from 'react-toastify';
 
 import Axios from '~/utils/Axios';
@@ -26,20 +27,25 @@ const LoginPage: NextPageWithLayout = () => {
     const onSubmit = async (data: FieldValues) => {
         try {
             const res = await Axios({
-                method: 'POST',
+                method: 'post',
                 data: data,
             });
-
-            const resData = res.data;
 
             toast.success('Đăng nhập thành công.', {
                 autoClose: 3000,
                 pauseOnHover: false,
             });
 
-            setTimeout(() => {
-                router.push('/');
-            }, 3000);
+            if (hasCookie('roleID')) {
+                // TODO: Navigate to admin page
+                setTimeout(() => {
+                    router.push('/admin');
+                }, 3000);
+            } else {
+                setTimeout(() => {
+                    router.push('/');
+                }, 3000);
+            }
         } catch (error) {
             toast.error('Đăng nhập thất bại.');
         }

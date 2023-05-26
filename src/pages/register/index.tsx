@@ -29,7 +29,7 @@ const RegisterPage: NextPageWithLayout = () => {
             }
 
             const res = await Axios({
-                method: 'POST',
+                method: 'post',
                 data: {
                     email: data.email,
                     password: data.password,
@@ -38,13 +38,11 @@ const RegisterPage: NextPageWithLayout = () => {
 
             const resData = res.data;
 
-            toast.success('Đăng nhập thành công.');
+            toast.success('Đăng ký thành công.');
         } catch (error) {
-            toast.error('Đăng nhập thất bại.');
+            toast.error('Đăng ký thất bại.');
         }
     };
-
-    console.log(errors);
 
     const handleHiddenPassword = (e: React.MouseEvent) => {
         e.preventDefault();

@@ -1,8 +1,12 @@
 import { useRouter } from 'next/router';
+import { GetServerSideProps } from 'next';
 
-function BookingPage() {
+function BookingPage({ data }: { data: IData | null }) {
+    const doctors = data?.doctors;
+
     return (
         <main className="min-h-screen justify-center p-12 pt-28 flex flex-row gap-8 flex-wrap">
+            {/* TODO: Render doctors */}
             <DoctorItem
                 id="12345"
                 name="Trương Thiên Lộc"
@@ -49,6 +53,42 @@ function BookingPage() {
 }
 
 export default BookingPage;
+
+interface IData {
+    doctors: {
+        id: string;
+        name: string;
+        email: string;
+        address: string;
+        phone: string;
+        specialist: string;
+        gender: string;
+        avatar: string;
+    }[];
+}
+
+export const getServerSideProps: GetServerSideProps<
+    { data: IData } | { data: null }
+> = async (ctx) => {
+    try {
+        const url = process.env.NEXT_PUBLIC_BASE_URL;
+        // const id = ctx.params?.id;
+        const res = await fetch(`${url}/get-all-doctor`);
+        const data = (await res.json()) as IData;
+
+        return {
+            props: {
+                data: data,
+            },
+        };
+    } catch (err) {
+        return {
+            props: {
+                data: null,
+            },
+        };
+    }
+};
 
 interface IDoctorItemProps {
     id?: string;

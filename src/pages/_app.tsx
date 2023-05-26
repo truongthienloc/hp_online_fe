@@ -1,4 +1,5 @@
 import '~/styles/globals.scss';
+import '~/styles/modal.scss';
 import 'react-toastify/dist/ReactToastify.css';
 import type { AppPropsWithLayout } from '~/types';
 import DefaultLayout from '~/components/Layouts/DefaultLayout';
@@ -15,7 +16,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
                 <meta charSet="utf-8" />
                 <link
                     rel="shortcut icon"
-                    href="images/Logo HPO.png"
+                    href="/images/Logo HPO.png"
                     type="image/x-icon"
                 />
             </Head>
