@@ -3,12 +3,13 @@ import { MouseEventHandler, ChangeEvent } from 'react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { getCookie } from 'cookies-next';
+import { ToastContainer, toast } from 'react-toastify'; 
 import Axios from '~/utils/Axios';
 
 import Modal from '~/components/Modal';
 
 function DoctorDetailPage({ data }: { data: IData | null }) {
-    const [isVisible, setIsVisible] = useState(true);
+    const [isVisible, setIsVisible] = useState(false);
     const [modalOption, setModalOption] = useState('online');
     const [date, setDate] = useState('');
     const [time, setTime] = useState({ start: '', end: '' });
@@ -57,8 +58,10 @@ function DoctorDetailPage({ data }: { data: IData | null }) {
             const res = await Axios.post(`${url}/book-appointment`, data);
 
             // TODO: Booking thành công
+            toast.success('Đặt lịch thành công. Chúng tôi sẽ liên hệ cho bạn sớm nhất có thể');
         } catch (err) {
             // TODO: Booking error
+            toast.error('Đặt lịch thất bại.');
         }
     };
     return (
@@ -142,6 +145,19 @@ function DoctorDetailPage({ data }: { data: IData | null }) {
                     </form>
                 </Modal>
             </div>
+
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </main>
     );
 }

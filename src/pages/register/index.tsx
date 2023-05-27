@@ -30,6 +30,7 @@ const RegisterPage: NextPageWithLayout = () => {
 
             const res = await Axios({
                 method: 'post',
+                url: '/signup',
                 data: {
                     email: data.email,
                     password: data.password,

@@ -28,8 +28,12 @@ const LoginPage: NextPageWithLayout = () => {
         try {
             const res = await Axios({
                 method: 'post',
+                url: '/login',
                 data: data,
             });
+
+            console.log("res: ", res);
+            
 
             toast.success('Đăng nhập thành công.', {
                 autoClose: 3000,
