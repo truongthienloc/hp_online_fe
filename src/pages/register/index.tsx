@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import clsx from 'clsx';
-import React, { useId, useState } from 'react';
+import React, { useId, useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -21,6 +21,21 @@ const RegisterPage: NextPageWithLayout = () => {
         handleSubmit,
         formState: { errors },
     } = useForm();
+
+    useEffect(() => {
+        const submit = document.querySelector('#submit') as HTMLButtonElement;
+        const handleEnterPress = (e: KeyboardEvent) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                submit.click();
+            }
+        };
+        document.addEventListener('keydown', handleEnterPress);
+
+        return () => {
+            document.removeEventListener('keydown', handleEnterPress);
+        };
+    }, []);
 
     const onSubmit = async (data: FieldValues) => {
         try {
@@ -156,10 +171,11 @@ const RegisterPage: NextPageWithLayout = () => {
             </div>
 
             <button
+                id="submit"
                 className="h-8 rounded font-bold text-white bg-primary flex items-center justify-center"
                 type="submit"
             >
-                LOGIN
+                SIGNUP
             </button>
 
             <div className="flex flex-row justify-center gap-2">

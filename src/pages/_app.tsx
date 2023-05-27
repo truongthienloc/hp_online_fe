@@ -19,8 +19,8 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
                     type="image/x-icon"
                 />
             </Head>
-                <Component {...pageProps} />
+            <Component {...pageProps} />
         </div>,
     );
 }
-export default App
+export default App;

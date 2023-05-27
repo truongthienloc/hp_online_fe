@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import clsx from 'clsx';
-import React, { useId, useState } from 'react';
+import React, { useEffect, useId, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { hasCookie } from 'cookies-next';
@@ -24,6 +24,21 @@ const LoginPage: NextPageWithLayout = () => {
         formState: { errors },
     } = useForm();
 
+    useEffect(() => {
+        const submit = document.querySelector('#submit') as HTMLButtonElement;
+        const handleEnterPress = (e: KeyboardEvent) => {
+            e.preventDefault();
+            if (e.key === 'Enter') {
+                submit.click();
+            }
+        };
+        document.addEventListener('keydown', handleEnterPress);
+
+        return () => {
+            document.removeEventListener('keydown', handleEnterPress);
+        };
+    }, []);
+
     const onSubmit = async (data: FieldValues) => {
         try {
             const res = await Axios({
@@ -32,8 +47,7 @@ const LoginPage: NextPageWithLayout = () => {
                 data: data,
             });
 
-            console.log("res: ", res);
-            
+            console.log('res: ', res);
 
             toast.success('Đăng nhập thành công.', {
                 autoClose: 3000,
@@ -126,6 +140,7 @@ const LoginPage: NextPageWithLayout = () => {
             </div>
 
             <button
+                id="submit"
                 className="h-8 rounded font-bold text-white bg-primary flex items-center justify-center"
                 type="submit"
             >

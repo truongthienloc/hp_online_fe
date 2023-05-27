@@ -3,7 +3,7 @@ import { MouseEventHandler, ChangeEvent } from 'react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { getCookie } from 'cookies-next';
-import { ToastContainer, toast } from 'react-toastify'; 
+import { ToastContainer, toast } from 'react-toastify';
 import Axios from '~/utils/Axios';
 
 import Modal from '~/components/Modal';
@@ -39,8 +39,8 @@ function DoctorDetailPage({ data }: { data: IData | null }) {
     };
 
     const handleClickModalCancel = () => {
-        setIsVisible(false)
-    }
+        setIsVisible(false);
+    };
 
     const handleClickModalOK = async () => {
         setIsVisible(false);
@@ -58,7 +58,9 @@ function DoctorDetailPage({ data }: { data: IData | null }) {
             const res = await Axios.post(`${url}/book-appointment`, data);
 
             // TODO: Booking thành công
-            toast.success('Đặt lịch thành công. Chúng tôi sẽ liên hệ cho bạn sớm nhất có thể');
+            toast.success(
+                'Đặt lịch thành công. Chúng tôi sẽ liên hệ cho bạn sớm nhất có thể',
+            );
         } catch (err) {
             // TODO: Booking error
             toast.error('Đặt lịch thất bại.');
