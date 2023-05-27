@@ -2,3 +2,14 @@ $primary-color: #8299ce;
 .form-gradient {
     background-image: linear-gradient(to right, $primary-color, white);
 }
+
+.auth-intro {
+    img {
+        box-shadow: 0px 14px 0 0 $primary-color;
+        ::before {
+        }
+
+        ::after {
+        }
+    }
+}

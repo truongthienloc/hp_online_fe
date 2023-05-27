@@ -1,9 +1,10 @@
 import '~/styles/globals.scss';
+import '~/styles/modal.scss';
+import 'react-toastify/dist/ReactToastify.css';
 import type { AppPropsWithLayout } from '~/types';
 import DefaultLayout from '~/components/Layouts/DefaultLayout';
 import Head from 'next/head';
-
-export default function App({ Component, pageProps }: AppPropsWithLayout) {
+function App({ Component, pageProps }: AppPropsWithLayout) {
     const getLayout =
         Component.getLayout ?? ((page) => <DefaultLayout>{page}</DefaultLayout>);
 
@@ -14,11 +15,12 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
                 <meta charSet="utf-8" />
                 <link
                     rel="shortcut icon"
-                    href="images/Logo HPO.png"
+                    href="/images/Logo HPO.png"
                     type="image/x-icon"
                 />
             </Head>
-            <Component {...pageProps} />
+                <Component {...pageProps} />
         </div>,
     );
 }
+export default App

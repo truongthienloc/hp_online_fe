@@ -15,6 +15,35 @@ const AnKhang = () => {
     const router = useRouter()
     const {pharma} = router.query
     let namePharma:string = ''
+    interface dataType {
+        name: string,
+        pathName: string,
+        price: number
+        quantity: number
+    }
+
+    let data:dataType[] = [
+        {
+            name: 'Viên sủi Vitamin C Cali USA giúp tăng đề kháng, giảm mệt mỏi',
+            pathName: 'https://cdn.tgdd.vn/Products/Images/11478/299279/vien-sui-vitamin-c-caliusa-tuyp-10-vien-thumb-1-1-200x200.jpg',
+            price: 49000,
+            quantity: 1,
+
+        },
+        {
+            name: 'Fexophar 60mg trị viêm mũi dị ứng, dị ứng da, nổi mề đay',
+            pathName: 'https://cdn.tgdd.vn/Products/Images/10036/225727/fexophar-60mg-h-50vien-thumb-1-1-200x200.jpg',
+            price: 99500,
+            quantity: 1,
+        },
+        {
+            name: 'Pharmekal Spathion White Skin làm trắng da, giảm nám',
+            pathName: 'https://cdn.tgdd.vn/Products/Images/7004/130262/vien-uong-spathion-30-vien-1-200x200.jpg',
+            price: 590000,
+            quantity: 1,
+        },
+
+    ]
     switch (pharma) {
         case 'long-chau':
             namePharma = 'Long Châu'
@@ -29,6 +58,7 @@ const AnKhang = () => {
     const notify = () => {
         toast.success("Bạn đã thêm sản phẩm giỏ hàng thành công")
     }
+
     return (
         <div className="pt-[50px] mb-[250px]  ">
             <div className={
@@ -50,118 +80,46 @@ const AnKhang = () => {
                     enterButton = 'Search'
                     />
                 </div>
-                <div className='flex cursor-pointer opacity-30 hover:opacity-100 duration-100 '>
-                    <p className='text-lg text-white'>Giỏ hàng</p>
-                    <AiOutlineShoppingCart className='ml-2 text-3xl text-white'/>
+                <div className=' cursor-pointer opacity-30 hover:opacity-100 duration-100 '>
+                    <Link className='flex' href={`${pharma}/cart`}>
+                        <p className='text-lg text-white'>Giỏ hàng</p>
+                        <AiOutlineShoppingCart className='ml-2 text-3xl text-white'/>
+                    </Link>
                 </div>
             </div>
             <div className='flex flex-wrap justify-center'>
-                <div className='p-[36px]'>
-                <Card sx={{ maxWidth: 300 }}>
-                    <CardActionArea>
-                        <CardMedia
-                        className='p-[40px]'
-                        component="img"
-                        image="https://cdn.tgdd.vn/Products/Images/7004/243292/glutathion-h-2lox15v-thumb01-600x600.jpg"
-                        alt="green iguana"
-                        />
-                        <CardContent>
-                        <Typography gutterBottom variant="body1" component="div">
-                            L-Cystin B6 làm đẹp da, tóc, móng
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Online giá rẻ
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            91.800đ/Hộp
-                        </Typography>
-                        <div className='flex justify-center'>
-                            <Button onClick = {notify} className='mt-4'>Thêm vào giỏ hàng</Button>
-                        </div>
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
-                </div>
-                <div className='p-[36px]'>
-                <Card sx={{ maxWidth: 300 }}>
-                    <CardActionArea>
-                        <CardMedia
-                        className='p-[40px]'
-                        component="img"
-                        image="https://cdn.tgdd.vn/Products/Images/7004/229966/vien-uong-oribe-h-30vien-thumb-1-1-600x600.jpg"
-                        alt="green iguana"
-                        />
-                        <CardContent>
-                        <Typography gutterBottom variant="body1" component="div">
-                            L-Cystin B6 làm đẹp da, tóc, móng
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Online giá rẻ
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            91.800đ/Hộp
-                        </Typography>
-                        <div className='flex justify-center'>
-                            <Button onClick = {notify} className='mt-4'>Thêm vào giỏ hàng</Button>
-                        </div>
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
-                </div>
-                <div className='p-[36px]'>
-                <Link href ={`${pharma}/cart`}>
+                {data.map((el,index) => {
+                    return (
+                        <div key = {index} className='p-[36px]'>
                     <Card sx={{ maxWidth: 300 }}>
                     <CardActionArea>
                         <CardMedia
                         className='p-[40px]'
                         component="img"
-                        image="https://cdn.tgdd.vn/Products/Images/7004/197432/vien-uong-bo-toc-welhair-for-women-30-vien-thumb-1-2-600x600.jpg"
+                        image={el.pathName}
                         alt="green iguana"
                         />
                         <CardContent>
                         <Typography gutterBottom variant="body1" component="div">
-                            L-Cystin B6 làm đẹp da, tóc, móng
+                            {el.name}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
                             Online giá rẻ
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            91.800đ/Hộp
+                            {el.price}đ/Hộp
                         </Typography>
                         <div className='flex justify-center'>
-                            <Button onClick = {notify} className='mt-4'>Thêm vào giỏ hàng</Button>
-                        </div>
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
-                </Link>
-                </div>
-                <div className='p-[36px]'>
-                <Card sx={{ maxWidth: 300 }}>
-                    <CardActionArea>
-                        <CardMedia
-                        className='p-[40px]'
-                        component="img"
-                        image="https://cdn.tgdd.vn/Products/Images/7004/247931/l-cystin-b6-h-60v-thumb-1-600x600.jpg"
-                        alt="green iguana"
-                        />
-                        <CardContent>
-                        <Typography gutterBottom variant="body1" component="div">
-                            L-Cystin B6 làm đẹp da, tóc, móng
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Online giá rẻ
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            91.800đ/Hộp
-                        </Typography>
-                        <div className='flex justify-center'>
-                            <Button onClick = {notify} className='mt-4'>Thêm vào giỏ hàng</Button>
+                            <Button onClick = {(e) => {
+                                notify()
+                            }} className='mt-4'>Thêm vào giỏ hàng</Button>
                         </div>
                         </CardContent>
                     </CardActionArea>
                 </Card>
                 </div>
+                    )
+                })}
             </div>
             <ToastContainer theme='light' />
         </div>

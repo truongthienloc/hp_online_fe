@@ -1,7 +1,7 @@
 import { useRouter } from "next/router"
 import Dashboard from "./dashboard"
 import AllUsers from "./allusers"
-import AllDoctors from './alldoctors'
+import AllDoctors from "./alldoctors"
 import AllSupporters from './allsupporters'
 import Booking from "./booking"
 import UpdatePatient from "./newpatient"

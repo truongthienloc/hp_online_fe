@@ -5,56 +5,33 @@ import { DeleteIcon } from "./DeleteIcon";
 
 import NewPatientInfor from "./newpatientmodal";
 import { NextPage } from "next";
+import { NextPageWithLayout } from "~/types";
 type UserType = {
-  id: string | number,
-  name?: string,
-  email?: string,
-  role?: string,
-  team?: string,
-  status: "active" | "paused" | "vacation",
-  age?: string,
-  avatar?: string,
-  phone: string
+  userID:number,
+  updateAt:string,
+  appointmentID:number,
+  name:string,
+  phone:string,
+  email:string
 };
 
 interface iProps {
-    tabIndex:number
+    tabIndex:number,
+    data:UserType[]
 }
 
-const NewPatientTable:NextPage<iProps> = (props) => {
+const NewPatientTable:NextPageWithLayout<iProps> = (props) => {
+  const {data} = props
   const columns = [
-    { name: "ID", uid: "id"},
+    { name: "USERID", uid: "userID"},
     { name: "NAME", uid: "name" },
     { name: 'PHONE', uid: 'phone'},
     { name: 'EMAIL', uid: 'email'},
     { name: "ACTIONS", uid: "actions" },
   ];
-  const users: UserType[] = [
-    {
-      id: 1,
-      name: "Tony Reichert",
-      role: "CEO",
-      team: "Management",
-      status: "active",
-      age: "29",
-      avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-      email: "tony.reichert@example.com",
-      phone: '0865562334',
-    },
-    {
-      id: 2,
-      name: "Zoey Lang",
-      role: "Technical Lead",
-      team: "Development",
-      status: "paused",
-      age: "25",
-      avatar: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
-      email: "zoey.lang@example.com",
-      phone: '123456789',
-    },
-  ];
   const renderCell = (user: UserType, columnKey:any ) => {
     const cellValue = user[columnKey as keyof typeof user]
+    console.log(columnKey)
     switch (columnKey) {
       case "id": 
       return (
@@ -69,27 +46,27 @@ const NewPatientTable:NextPage<iProps> = (props) => {
 
       case "name":
         return (
-          <User squared src={user?.avatar} name={cellValue} css={{ p: 0 }}>
+          <User squared src='123' name={cellValue} css={{ p: 0 }}>
           </User>
         );
       case "status":
-        return <StyledBadge type={user?.status}>{cellValue}</StyledBadge>;
+        return <StyledBadge type='active'>{cellValue}</StyledBadge>;
 
       case "actions":
         return (
           <Row justify="center" align="center">
             <Col css={{ d: "flex" }}>
               <IconButton>
-                {props.tabIndex == 0 ? <Button  color="primary" auto>
-                    Thêm
-                </Button> : props.tabIndex === 1 ? <Button shadow color='success' auto>Xác nhận</Button> : <NewPatientInfor/> }
+                {props.tabIndex == 0 ? <Button  color="success" auto>
+                    Xác nhận
+                </Button> : props.tabIndex === 1 ? <NewPatientInfor/> : <Button color = 'default'>Cancel</Button> }
             </IconButton>
             </Col>
             <Col css={{ d: "flex" }}>
               <Tooltip
                 content="Delete user"
                 color="error"
-                onClick={() => console.log("Delete user", user?.id)}
+                onClick={() => console.log("Delete user", user?.userID)}
               >
                 <IconButton>
                   <DeleteIcon size={20} fill="#FF0080" />
@@ -122,7 +99,7 @@ const NewPatientTable:NextPage<iProps> = (props) => {
           </Table.Column>
         )}
       </Table.Header>
-      <Table.Body items={users}>
+      <Table.Body items={data}>
         {(item: UserType) => (
           <Table.Row>
             {(columnKey:any) => {

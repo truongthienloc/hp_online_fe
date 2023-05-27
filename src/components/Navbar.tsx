@@ -1,15 +1,17 @@
 import Link from 'next/link';
-import Head from 'next/head';
-
+import { hasCookie } from 'cookies-next';
+import Image from 'next/image';
 function Navbar() {
     return (
         <nav className="w-full h-[60px] flex flex-row gap-16 bg-primary fixed shadow z-10">
             <div className="flex-1 flex justify-center p-1">
                 <Link href="/">
-                    <img
+                    <Image
                         className="h-full hover:scale-125 transition"
-                        src="images/Logo HPO.png"
+                        src="/images/Logo HPO.png"
                         alt="Trang chủ"
+                        width={50}
+                        height={50}
                     />
                 </Link>
             </div>
@@ -27,12 +29,21 @@ function Navbar() {
                 >
                     <i className="fa fa-search text-white"></i>
                 </Link>
-                <Link
-                    className="mr-4 hover:bg-[#4261a9] w-8 h-8 flex items-center justify-center rounded transition-colors"
-                    href="/login"
-                >
-                    <i className="fa fa-user text-white"></i>
-                </Link>
+                {hasCookie('id') ? (
+                    <Link
+                        className="mr-4 bg-white hover:bg-gray-400 w-8 h-8 flex items-center justify-center rounded transition-colors"
+                        href="/login"
+                    >
+                        <i className="fa fa-user text-violet-600"></i>
+                    </Link>
+                ) : (
+                    <Link
+                        className="mr-4 hover:bg-[#4261a9] w-8 h-8 flex items-center justify-center rounded transition-colors"
+                        href="/login"
+                    >
+                        <i className="fa fa-user text-white"></i>
+                    </Link>
+                )}
             </div>
         </nav>
     );

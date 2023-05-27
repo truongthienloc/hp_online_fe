@@ -7,7 +7,7 @@ const AllSupporters = () => {
                 <h2 className="font-bold text-lg">Quản lí hỗ trợ viên</h2>
             </div>
             <div>
-                <UserTable/>
+                <UserTable />
             </div>
         </div>
     )

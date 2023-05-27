@@ -3,7 +3,14 @@ import { Button, Modal } from 'antd';
 import { NextPage } from 'next';
 import {GrCircleInformation} from 'react-icons/gr'
 import Image from 'next/image';
-const ModalInfor: NextPage = () => {
+interface iProps {
+  name:string | undefined,
+  address:string,
+  specialist:string
+}
+const ModalInfor: NextPage<iProps> = (props) => {
+  const {name,address,specialist} = props
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
@@ -37,15 +44,15 @@ const ModalInfor: NextPage = () => {
             </div>
             <div className=''>
                 <p className='mb-2 font-bold'>Họ và tên: </p>
-                <p className='p-4 bg-[#ecebf7] rounded-lg '>James Patterson</p>
+                <p className='p-4 bg-[#ecebf7] rounded-lg '>{name}</p>
             </div>
             <div className='mt-2'>
                 <p className='mb-2 font-bold'>Địa chỉ: </p>
-                <p className='p-4 bg-[#ecebf7] rounded-lg '>Los Angelas, USA</p>
+                <p className='p-4 bg-[#ecebf7] rounded-lg '>{address}</p>
             </div>
             <div className='mt-2'>
                 <p className='mb-2 font-bold'>Chuyên môn: </p>
-                <p className='p-4 bg-[#ecebf7] rounded-lg '>Răng hàm mặt</p>
+                <p className='p-4 bg-[#ecebf7] rounded-lg '>{specialist}</p>
             </div>
         </div>
       </Modal>
