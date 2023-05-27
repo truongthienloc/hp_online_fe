@@ -10,8 +10,14 @@ import { CardActionArea } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Link from 'next/link';
+import { useState } from 'react';
+import axios from 'axios';
 const AnKhang = () => {
+    const [dataSearch,setDataSearch] = useState()
     const onSearch = (value: string) => console.log(value);
+    const handleGetDataSearch  = async () => {
+        const response = await axios.get('')
+    }
     const router = useRouter()
     const {pharma} = router.query
     let namePharma:string = ''
