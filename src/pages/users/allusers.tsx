@@ -7,7 +7,7 @@ const AllUsers = () => {
                 <h2 className="font-bold text-lg">Quản lí thành viên</h2>
             </div>
             <div>
-                <UserTable />
+                {/* <UserTable /> */}
             </div>
         </div>
     );
