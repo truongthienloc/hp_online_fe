@@ -2,6 +2,7 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import React, { useId, useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 
 import Axios from '~/utils/Axios';
@@ -10,6 +11,7 @@ import { NextPageWithLayout } from '~/types';
 import { FieldValues } from 'react-hook-form/dist/types';
 
 const RegisterPage: NextPageWithLayout = () => {
+    const router = useRouter();
     const emailId = useId();
     const passwordId = useId();
     const rePasswordId = useId();
@@ -43,20 +45,35 @@ const RegisterPage: NextPageWithLayout = () => {
                 return toast.error('2 password không trùng khớp!');
             }
 
-            const res = await Axios({
-                method: 'post',
-                url: '/signup',
-                data: {
-                    email: data.email,
-                    password: data.password,
+            const res = await toast.promise(
+                Axios({
+                    method: 'post',
+                    url: '/signup',
+                    data: {
+                        email: data.email,
+                        password: data.password,
+                    },
+                }),
+                {
+                    pending: 'Đang đăng kí tài khoản',
+                    success: 'Đăng kí thành công',
+                    error: 'Đăng nhập thất bại',
                 },
-            });
+                {
+                    autoClose: 3000,
+                    pauseOnHover: false,
+                }
+            );
 
             const resData = res.data;
 
-            toast.success('Đăng ký thành công.');
+            setTimeout(() => {
+                router.push('/login');
+            }, 3000);
+
+            // toast.success('Đăng ký thành công.');
         } catch (error) {
-            toast.error('Đăng ký thất bại.');
+            // toast.error('Đăng ký thất bại.');
         }
     };
 

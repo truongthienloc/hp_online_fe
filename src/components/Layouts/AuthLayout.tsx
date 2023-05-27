@@ -24,7 +24,7 @@ function AuthLayout({ children }: LayoutProbs) {
                     />
                     <div
                         className={clsx(
-                            'flex-1 w-full h-40 flex flex-col gap-2 bg-primary text-white p-4',
+                            'flex-1 w-full h-40 flex flex-col gap-2 bg-primary text-white p-4 rounded-bl-[inherit]',
                             style['auth-intro__info'],
                         )}
                     >

@@ -27,8 +27,8 @@ const LoginPage: NextPageWithLayout = () => {
     useEffect(() => {
         const submit = document.querySelector('#submit') as HTMLButtonElement;
         const handleEnterPress = (e: KeyboardEvent) => {
-            e.preventDefault();
             if (e.key === 'Enter') {
+                e.preventDefault();
                 submit.click();
             }
         };
@@ -41,18 +41,27 @@ const LoginPage: NextPageWithLayout = () => {
 
     const onSubmit = async (data: FieldValues) => {
         try {
-            const res = await Axios({
-                method: 'post',
-                url: '/login',
-                data: data,
-            });
+            const res = await toast.promise(
+                Axios.post('/login', data, {
+                    withCredentials: true
+                }),
+                {
+                    pending: 'Đang đăng nhập',
+                    success: 'Đăng nhập thành công',
+                    error: 'Đăng nhập thất bại'
+                },
+                {
+                    autoClose: 3000,
+                    pauseOnHover: false,
+                }
+            );
 
             console.log('res: ', res);
 
-            toast.success('Đăng nhập thành công.', {
-                autoClose: 3000,
-                pauseOnHover: false,
-            });
+            // toast.success('Đăng nhập thành công.', {
+            //     autoClose: 3000,
+            //     pauseOnHover: false,
+            // });
 
             if (hasCookie('roleID')) {
                 // TODO: Navigate to admin page
@@ -65,7 +74,7 @@ const LoginPage: NextPageWithLayout = () => {
                 }, 3000);
             }
         } catch (error) {
-            toast.error('Đăng nhập thất bại.');
+            // toast.error('Đăng nhập thất bại.');
         }
     };
 
