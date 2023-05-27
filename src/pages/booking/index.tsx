@@ -1,25 +1,26 @@
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
+import { useEffect } from 'react';
 
 function BookingPage({ data }: { data: IData | null }) {
     const doctors = data?.doctors;
+
+    // console.log(data);
 
     return (
         <main className="min-h-screen justify-center p-12 pt-28 flex flex-row gap-8 flex-wrap">
             {/* TODO: Render doctors */}
 
-            {
-                // doctors?.map(doctor => (
-                //     <DoctorItem
-                //         key={doctor.id}
-                //         id={doctor.id}
-                //         name={doctor.name}
-                //         specialist={doctor.specialist}
-                //         avatar={doctor.avatar}
-                //     />
-                // ))
-            }
-            <DoctorItem
+            {doctors?.map((doctor) => (
+                <DoctorItem
+                    key={doctor.id}
+                    id={doctor.id}
+                    name={doctor.name}
+                    specialist={doctor.specialist}
+                    avatar={doctor.avatar}
+                />
+            ))}
+            {/* <DoctorItem
                 id="12345"
                 name="Trương Thiên Lộc"
                 specialist="Chuyên viên tâm lí"
@@ -59,24 +60,26 @@ function BookingPage({ data }: { data: IData | null }) {
                 name="ABC"
                 specialist="Tư vấn viên dinh dưỡng"
                 avatar="images/doctor-01.jpg"
-            />
+            /> */}
         </main>
     );
 }
 
 export default BookingPage;
 
+interface IDoctorData {
+    id: string;
+    name: string;
+    email: string;
+    address: string;
+    phone: string;
+    specialist: string;
+    gender: string;
+    avatar: string;
+}
+
 interface IData {
-    doctors: {
-        id: string;
-        name: string;
-        email: string;
-        address: string;
-        phone: string;
-        specialist: string;
-        gender: string;
-        avatar: string;
-    }[];
+    doctors: IDoctorData[];
 }
 
 export const getServerSideProps: GetServerSideProps<
@@ -86,14 +89,20 @@ export const getServerSideProps: GetServerSideProps<
         const url = process.env.NEXT_PUBLIC_BASE_URL;
         // const id = ctx.params?.id;
         const res = await fetch(`${url}/get-all-doctor`);
-        const data = (await res.json()) as IData;
+        // console.log("data: ", res);
+        const doctors = (await res.json()) as IDoctorData[];
+
+        // console.log("data: ", doctors);
 
         return {
             props: {
-                data: data,
+                data: {
+                    doctors: doctors,
+                },
             },
         };
     } catch (err) {
+        // console.log("error", err);
         return {
             props: {
                 data: null,

@@ -62,7 +62,7 @@ const RegisterPage: NextPageWithLayout = () => {
                 {
                     autoClose: 3000,
                     pauseOnHover: false,
-                }
+                },
             );
 
             const resData = res.data;

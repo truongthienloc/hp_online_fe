@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import React, { useEffect, useId, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import { hasCookie } from 'cookies-next';
+import { hasCookie, setCookie } from 'cookies-next';
 import { ToastContainer, toast } from 'react-toastify';
 
 import Axios from '~/utils/Axios';
@@ -42,18 +42,16 @@ const LoginPage: NextPageWithLayout = () => {
     const onSubmit = async (data: FieldValues) => {
         try {
             const res = await toast.promise(
-                Axios.post('/login', data, {
-                    withCredentials: true
-                }),
+                Axios.post('/login', data),
                 {
                     pending: 'Đang đăng nhập',
                     success: 'Đăng nhập thành công',
-                    error: 'Đăng nhập thất bại'
+                    error: 'Đăng nhập thất bại',
                 },
                 {
                     autoClose: 3000,
                     pauseOnHover: false,
-                }
+                },
             );
 
             console.log('res: ', res);
@@ -63,12 +61,15 @@ const LoginPage: NextPageWithLayout = () => {
             //     pauseOnHover: false,
             // });
 
-            if (hasCookie('roleID')) {
+            if (res.data.roleID) {
                 // TODO: Navigate to admin page
                 setTimeout(() => {
-                    router.push('/admin');
+                    router.push('/users');
                 }, 3000);
             } else {
+                setCookie('id', res.data.id);
+                // setCookie('token', res.data.token);
+
                 setTimeout(() => {
                     router.push('/');
                 }, 3000);

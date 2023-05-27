@@ -12,7 +12,14 @@ function Introduce() {
                         HEALTHCARE & PHARMACY ONLINE
                     </h1>
                     <p className="w-full text-xl text-center">
-                        Chào mừng bạn đến với HEALTHCARE & PHARMACY ONLINE - nơi cung cấp chăm sóc sức khỏe cho cộng đồng. Với cam kết sản phẩm và dịch vụ chất lượng, chúng tôi đáp ứng nhu cầu thực tế của bạn. Ngoài việc cung cấp thuốc chất lượng, chúng tôi còn có các dịch vụ chăm sóc sức khỏe đặc biệt, bao gồm đặt lịch hẹn online với chuyên viên tâm lý, tư vấn viên dinh dưỡng và bác sĩ chuyên khoa, giúp bạn giải đáp nhanh chóng và chuyên nghiệp mọi vấn đề về sức khỏe.
+                        Chào mừng bạn đến với HEALTHCARE & PHARMACY ONLINE - nơi cung
+                        cấp chăm sóc sức khỏe cho cộng đồng. Với cam kết sản phẩm và
+                        dịch vụ chất lượng, chúng tôi đáp ứng nhu cầu thực tế của
+                        bạn. Ngoài việc cung cấp thuốc chất lượng, chúng tôi còn có
+                        các dịch vụ chăm sóc sức khỏe đặc biệt, bao gồm đặt lịch hẹn
+                        online với chuyên viên tâm lý, tư vấn viên dinh dưỡng và bác
+                        sĩ chuyên khoa, giúp bạn giải đáp nhanh chóng và chuyên
+                        nghiệp mọi vấn đề về sức khỏe.
                     </p>
                 </div>
                 <div className="flex-1">

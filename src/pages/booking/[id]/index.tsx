@@ -1,5 +1,5 @@
 import type { GetServerSideProps } from 'next';
-import { MouseEventHandler, ChangeEvent } from 'react';
+import { MouseEventHandler, ChangeEvent, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { getCookie } from 'cookies-next';
@@ -8,19 +8,40 @@ import Axios from '~/utils/Axios';
 
 import Modal from '~/components/Modal';
 
+type IAvailable = {
+    employeeID: string;
+    start: string;
+    end: string;
+    date: string;
+    isFull: number;
+}[];
+
 function DoctorDetailPage({ data }: { data: IData | null }) {
     const [isVisible, setIsVisible] = useState(false);
     const [modalOption, setModalOption] = useState('online');
     const [date, setDate] = useState('');
     const [time, setTime] = useState({ start: '', end: '' });
+    const [available, setAvailable] = useState<IAvailable>([]);
 
     const router = useRouter();
+
+    const getAvailable = async () => {
+        const res = await Axios.get(
+            `/get-available-time-by-id?employeeID=${data?.id}`,
+        );
+        const resData = res.data;
+        setAvailable(resData);
+    };
+
+    useEffect(() => {
+        getAvailable();
+    }, []);
 
     // TODO: phân giải data từ BE
     const name = data?.name || 'Trương Thiên Lộc';
     const specialist = data?.specialist || 'Chuyên viên tâm lí';
-    const detail =
-        data?.detail ||
+    const description =
+        data?.description ||
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur iure exercitationem cumque, sint eveniet dolores ipsum, aspernatur tenetur alias repellendus error nemo harum a eos reiciendis, rem consequuntur recusandae maiores.Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur iure exercitationem cumque, sint eveniet dolores ipsum, aspernatur tenetur alias repellendus error nemo harum a eos reiciendis, rem consequuntur recusandae maiores.Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur iure exercitationem cumque, sint eveniet dolores ipsum, aspernatur tenetur alias repellendus error nemo harum a eos reiciendis, rem consequuntur recusandae maiores.Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur iure exercitationem cumque, sint eveniet dolores ipsum, aspernatur tenetur alias repellendus error nemo harum a eos reiciendis, rem consequuntur recusandae maiores.Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur iure exercitationem cumque, sint eveniet dolores ipsum, aspernatur tenetur alias repellendus error nemo harum a eos reiciendis, rem consequuntur recusandae maiores.Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur iure exercitationem cumque, sint eveniet dolores ipsum, aspernatur tenetur alias repellendus error nemo harum a eos reiciendis, rem consequuntur recusandae maiores.Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur iure exercitationem cumque, sint eveniet dolores ipsum, aspernatur tenetur alias repellendus error nemo harum a eos reiciendis, rem consequuntur recusandae maiores.Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur iure exercitationem cumque, sint eveniet dolores ipsum, aspernatur tenetur alias repellendus error nemo harum a eos reiciendis, rem consequuntur recusandae maiores.Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur iure exercitationem cumque, sint eveniet dolores ipsum, aspernatur tenetur alias repellendus error nemo harum a eos reiciendis, rem consequuntur recusandae maiores.Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur iure exercitationem cumque, sint eveniet dolores ipsum, aspernatur tenetur alias repellendus error nemo harum a eos reiciendis, rem consequuntur recusandae maiores.Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur iure exercitationem cumque, sint eveniet dolores ipsum, aspernatur tenetur alias repellendus error nemo harum a eos reiciendis, rem consequuntur recusandae maiores.Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur iure exercitationem cumque, sint eveniet dolores ipsum, aspernatur tenetur alias repellendus error nemo harum a eos reiciendis, rem consequuntur recusandae maiores.Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur iure exercitationem cumque, sint eveniet dolores ipsum, aspernatur tenetur alias repellendus error nemo harum a eos reiciendis, rem consequuntur recusandae maiores.';
 
     const avatar = data?.avatar || '/images/doctor-01.jpg';
@@ -55,7 +76,18 @@ function DoctorDetailPage({ data }: { data: IData | null }) {
                 type: modalOption,
             };
             const url = process.env.NEXT_PUBLIC_BASE_URL;
-            const res = await Axios.post(`${url}/book-appointment`, data);
+            const res = await toast.promise(
+                Axios.post(`${url}/book-appointment`, data),
+                {
+                    pending: 'Đang gửi yêu cầu',
+                    success: '',
+                    error: 'Đăng nhập thất bại',
+                },
+                {
+                    autoClose: 3000,
+                    pauseOnHover: false,
+                },
+            );
 
             // TODO: Booking thành công
             toast.success(
@@ -77,7 +109,7 @@ function DoctorDetailPage({ data }: { data: IData | null }) {
                     <p className="font-semibold">Chức danh: {specialist}</p>
                 </div>
                 <p className="text-lg font-custom-serif text-justify first-line:ml-4 indent-16">
-                    {detail}
+                    {description}
                 </p>
             </div>
 
@@ -107,11 +139,16 @@ function DoctorDetailPage({ data }: { data: IData | null }) {
 
                 <div className="flex flex-row flex-wrap justify-start gap-2 w-full p-2 font-semibold text-lg bg-violet-200">
                     {/* TODO: Fetching data (available) and render  */}
-                    <TimeButton
-                        start="90:00:00"
-                        end="10:00:00"
-                        onClick={() => handleClickTimeButton('90:00:00', '10:00:00')}
-                    />
+                    {available.map((value) => (
+                        <TimeButton
+                            key={`${value.date} - ${value.start} - ${value.employeeID}`}
+                            start={value.start}
+                            end={value.end}
+                            onClick={() =>
+                                handleClickTimeButton(value.start, value.end)
+                            }
+                        />
+                    ))}
                 </div>
 
                 {/* TODO: Xử lí các sự kiện của Modal */}
@@ -174,7 +211,7 @@ interface IData {
     phone: string;
     specialist: string;
     gender: string;
-    detail: string;
+    description: string;
     avatar: string;
 }
 
@@ -186,6 +223,8 @@ export const getServerSideProps: GetServerSideProps<
         const id = ctx.params?.id;
         const res = await fetch(`${url}/get-doctor?employeeID=${id}`);
         const data = (await res.json()) as IData;
+
+        console.log('data: ', data);
 
         return {
             props: {
