@@ -1,14 +1,23 @@
 import clsx from 'clsx';
 import { LayoutProbs } from '~/types';
 import style from '~/styles/authPage.module.scss';
+import { AnimatePresence, motion } from 'framer-motion';
 
 function AuthLayout({ children }: LayoutProbs) {
     return (
-        <div className="min-h-screen flex items-center justify-center">
+        <div
+            className='bg-[#91d2d8]'
+        >
+                <div className='h-full opacity-30 bg-black z-50 w-full absolute top-0 left-0'></div>
+                <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{delay:0.25}}
+                >
+            <div className="min-h-screen flex items-center justify-center">
             <div
                 className={clsx(
-                    'h-[700px] w-[800px] flex flex-row rounded-md shadow-lg shadow-gray-600',
-                    style['form-gradient'],
+                    'z-[100] h-[700px] w-[1000px] flex flex-row rounded-md shadow-md  bg-white',
                 )}
             >
                 <div
@@ -18,20 +27,20 @@ function AuthLayout({ children }: LayoutProbs) {
                     )}
                 >
                     <img
-                        className="rounded-b-2xl rounded-tl-[inherit]"
-                        src="images/doctor-04.jpg"
+                        className="= rounded-tl-[inherit]"
+                        src="https://img.freepik.com/free-vector/hand-drawn-doctor-answer-questions-clipart-gesture-character_40876-3115.jpg?w=826&t=st=1685352285~exp=1685352885~hmac=5d98fbea7a4bcd3edea2bc3d2651c7a48be03dcfaf9c5b768412122fd5d9f3af"
                         alt="doctor"
                     />
                     <div
                         className={clsx(
-                            'flex-1 w-full h-40 flex flex-col gap-2 bg-primary text-white p-4',
+                            'p-4 py-8 flex-1 w-full h-40 flex flex-col gap-2 bg-[#91d2d8] text-white rounded-b-[0.375rem]',
                             style['auth-intro__info'],
                         )}
                     >
                         <h1 className="font-bold">
                             WELCOME TO HEALTHCARE & PHARMACY ONLINE
                         </h1>
-                        <p className="font-semibold">
+                        <p className="text-[16px]">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit.
                             Eos eum possimus illum omnis inventore. Eos aperiam
                             consectetur facere. Alias ducimus voluptate laudantium
@@ -42,6 +51,8 @@ function AuthLayout({ children }: LayoutProbs) {
 
                 <div className="h-full flex-1">{children}</div>
             </div>
+        </div>
+                </motion.div>
         </div>
     );
 }

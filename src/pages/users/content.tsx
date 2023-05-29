@@ -1,9 +1,9 @@
-import Category from "./[category]"
+import Category from './[category]';
 const Content = () => {
     return (
         <div className="">
-            <Category/>
+            <Category />
         </div>
-    )
-}
-export default Content
+    );
+};
+export default Content;

@@ -23,4 +23,4 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
         </div>,
     );
 }
-export default App
+export default App;

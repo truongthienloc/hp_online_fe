@@ -7,45 +7,57 @@ function BookingPage({ data }: { data: IData | null }) {
     return (
         <main className="min-h-screen justify-center p-12 pt-28 flex flex-row gap-8 flex-wrap">
             {/* TODO: Render doctors */}
+
+            {
+                // doctors?.map(doctor => (
+                //     <DoctorItem
+                //         key={doctor.id}
+                //         id={doctor.id}
+                //         name={doctor.name}
+                //         specialist={doctor.specialist}
+                //         avatar={doctor.avatar}
+                //     />
+                // ))
+            }
             <DoctorItem
                 id="12345"
                 name="Trương Thiên Lộc"
-                title="Tư vấn viên dinh dưỡng"
+                specialist="Chuyên viên tâm lí"
                 avatar="images/doctor-01.jpg"
             />
             <DoctorItem
                 name="ABC"
-                title="Tư vấn viên dinh dưỡng"
+                specialist="Tư vấn viên dinh dưỡng"
                 avatar="images/doctor-01.jpg"
             />
             <DoctorItem
                 name="ABC"
-                title="Tư vấn viên dinh dưỡng"
+                specialist="Tư vấn viên dinh dưỡng"
                 avatar="images/doctor-01.jpg"
             />
             <DoctorItem
                 name="ABC"
-                title="Tư vấn viên dinh dưỡng"
+                specialist="Tư vấn viên dinh dưỡng"
                 avatar="images/doctor-01.jpg"
             />
             <DoctorItem
                 name="ABC"
-                title="Tư vấn viên dinh dưỡng"
+                specialist="Tư vấn viên dinh dưỡng"
                 avatar="images/doctor-01.jpg"
             />
             <DoctorItem
                 name="ABC"
-                title="Tư vấn viên dinh dưỡng"
+                specialist="Tư vấn viên dinh dưỡng"
                 avatar="images/doctor-01.jpg"
             />
             <DoctorItem
                 name="ABC"
-                title="Tư vấn viên dinh dưỡng"
+                specialist="Tư vấn viên dinh dưỡng"
                 avatar="images/doctor-01.jpg"
             />
             <DoctorItem
                 name="ABC"
-                title="Tư vấn viên dinh dưỡng"
+                specialist="Tư vấn viên dinh dưỡng"
                 avatar="images/doctor-01.jpg"
             />
         </main>
@@ -93,11 +105,11 @@ export const getServerSideProps: GetServerSideProps<
 interface IDoctorItemProps {
     id?: string;
     name: string;
-    title: string;
+    specialist: string;
     avatar: string;
 }
 
-function DoctorItem({ id, name, title, avatar }: IDoctorItemProps) {
+function DoctorItem({ id, name, specialist, avatar }: IDoctorItemProps) {
     const router = useRouter();
 
     const handleClickDetail = () => {
@@ -113,7 +125,7 @@ function DoctorItem({ id, name, title, avatar }: IDoctorItemProps) {
             <img src={avatar} alt={name} />
             <p className="font-bold font-time-new-roman text-2xl">{name}</p>
             <p className="font-bold font-time-new-roman text-xl text-stone-500">
-                {title}
+                {specialist}
             </p>
             <button
                 className="bg-primary font-semibold text-white p-1"

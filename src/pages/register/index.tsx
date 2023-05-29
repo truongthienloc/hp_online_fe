@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import clsx from 'clsx';
-import React, { useId, useState } from 'react';
+import React, { useId, useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -22,6 +22,21 @@ const RegisterPage: NextPageWithLayout = () => {
         formState: { errors },
     } = useForm();
 
+    useEffect(() => {
+        const submit = document.querySelector('#submit') as HTMLButtonElement;
+        const handleEnterPress = (e: KeyboardEvent) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                submit.click();
+            }
+        };
+        document.addEventListener('keydown', handleEnterPress);
+
+        return () => {
+            document.removeEventListener('keydown', handleEnterPress);
+        };
+    }, []);
+
     const onSubmit = async (data: FieldValues) => {
         try {
             if (data.password !== data.rePassword) {
@@ -30,6 +45,7 @@ const RegisterPage: NextPageWithLayout = () => {
 
             const res = await Axios({
                 method: 'post',
+                url: '/signup',
                 data: {
                     email: data.email,
                     password: data.password,
@@ -67,9 +83,9 @@ const RegisterPage: NextPageWithLayout = () => {
             className="w-full h-full p-4 pt-8 flex flex-col gap-6"
             onSubmit={handleSubmit(onSubmit)}
         >
-            <img className="h-20 w-20" src="images/Logo HPO.png" alt="Logo HPO" />
-            <h1 className="font-bold text-lg">HEALTHCARE & PHARMACY ONLINE</h1>
-            <h2 className="font-bold text-lg">REGISTER</h2>
+            <div className='flex justify-center'><img className="h-20 w-20" src="images/Logo HPO.png" alt="Logo HPO" /></div>
+            <h1 className="text-center font-bold text-lg">HEALTHCARE & PHARMACY ONLINE</h1>
+            <h2 className="text-center font-bold text-lg">REGISTER</h2>
             <div className="w-full flex flex-col gap-1">
                 <label className="text-gray-600 font-bold" htmlFor={emailId}>
                     EMAIL:
@@ -81,7 +97,7 @@ const RegisterPage: NextPageWithLayout = () => {
                 )}
                 <input
                     {...register('email', { required: 'Enter your email' })}
-                    className="text-base bg-transparent border-b border-black outline-none p-1 focus:border-indigo-900 focus:border-b-2 "
+                    className="opacity-50 focus:opacity-100 duration-150 p-2 px-4 rounded-[24px] flex-1 text-base bg-transparent border-b  outline-none  border-indigo-900 border "
                     type="text"
                     placeholder="Email"
                     id={emailId}
@@ -102,7 +118,7 @@ const RegisterPage: NextPageWithLayout = () => {
                         {...register('password', {
                             required: 'Enter your password',
                         })}
-                        className="flex-1 text-base bg-transparent border-b border-black outline-none p-1 focus:border-indigo-900 focus:border-b-2 "
+                        className="opacity-50 focus:opacity-100 duration-150 p-2 px-4 rounded-[24px] flex-1 text-base bg-transparent border-b  outline-none  border-indigo-900 border "
                         type={hiddenPassword ? 'password' : 'text'}
                         placeholder="Password"
                         id={passwordId}
@@ -135,7 +151,7 @@ const RegisterPage: NextPageWithLayout = () => {
                         {...register('rePassword', {
                             required: 'Enter your re-password',
                         })}
-                        className="flex-1 text-base bg-transparent border-b border-black outline-none p-1 focus:border-indigo-900 focus:border-b-2"
+                        className="opacity-50 focus:opacity-100 duration-150 p-2 px-4 rounded-[24px] flex-1 text-base bg-transparent border-b  outline-none  border-indigo-900 border"
                         type={hiddenRePassword ? 'password' : 'text'}
                         placeholder="Re-password"
                         id={rePasswordId}
@@ -155,17 +171,18 @@ const RegisterPage: NextPageWithLayout = () => {
             </div>
 
             <button
-                className="h-8 rounded font-bold text-white bg-primary flex items-center justify-center"
+                id="submit"
+                className="h-8 rounded-[24px] font-bold  duration-150 text-white bg-[#91d2d8] flex items-center justify-center"
                 type="submit"
             >
-                LOGIN
+                SIGNUP
             </button>
 
             <div className="flex flex-row justify-center gap-2">
                 <span>Have an account.</span>
                 <Link
                     href={'/login'}
-                    className="text-orange-600 hover:text-violet-700"
+                    className="text-orange-600 hover:text-[#91d2d8]"
                 >
                     Login
                 </Link>

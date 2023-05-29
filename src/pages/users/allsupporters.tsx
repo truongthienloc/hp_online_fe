@@ -1,4 +1,4 @@
-import UserTable from "./UserTable"
+import UserTable from './UserTable';
 
 const AllSupporters = () => {
     return (
@@ -10,6 +10,6 @@ const AllSupporters = () => {
                 <UserTable />
             </div>
         </div>
-    )
-}
-export default AllSupporters
+    );
+};
+export default AllSupporters;
