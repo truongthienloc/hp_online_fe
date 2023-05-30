@@ -6,25 +6,6 @@ const { Search } = Input;
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Link from 'next/link';
-<<<<<<< HEAD
-import { useState } from 'react';
-import axios from 'axios';
-const AnKhang = () => {
-    const [dataSearch,setDataSearch] = useState()
-    const onSearch = (value: string) => console.log(value);
-    const handleGetDataSearch  = async () => {
-        const response = await axios.get('')
-    }
-    const router = useRouter()  
-    const {pharma} = router.query
-    let namePharma:string = ''
-    interface dataType {
-        name: string;
-        pathName: string;
-        price: number;
-        quantity: number;
-    }
-=======
 import { useEffect } from 'react';
 
 import { GetServerSideProps } from 'next/types';
@@ -39,7 +20,6 @@ const PharmacyDetail = ({ medicines }: IPharmacyDetailProps) => {
     const onSearch = (value: string) => console.log(value);
     const router = useRouter();
     const { pharma } = router.query;
->>>>>>> 545869955ff5522c62eafd684f71f2c5b7a2c260
 
     useEffect(() => {}, []);
 

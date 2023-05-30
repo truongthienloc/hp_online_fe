@@ -37,36 +37,6 @@ function BookingPage({ data }: { data: IData | null }) {
                 name="ABC"
                 specialist="Tư vấn viên dinh dưỡng"
                 avatar="images/doctor-01.jpg"
-            />
-            <DoctorItem
-                name="ABC"
-                specialist="Tư vấn viên dinh dưỡng"
-                avatar="images/doctor-01.jpg"
-            />
-            <DoctorItem
-                name="ABC"
-                specialist="Tư vấn viên dinh dưỡng"
-                avatar="images/doctor-01.jpg"
-            />
-            <DoctorItem
-                name="ABC"
-                specialist="Tư vấn viên dinh dưỡng"
-                avatar="images/doctor-01.jpg"
-            />
-            <DoctorItem
-                name="ABC"
-                specialist="Tư vấn viên dinh dưỡng"
-                avatar="images/doctor-01.jpg"
-            />
-            <DoctorItem
-                name="ABC"
-                specialist="Tư vấn viên dinh dưỡng"
-                avatar="images/doctor-01.jpg"
-            />
-            <DoctorItem
-                name="ABC"
-                specialist="Tư vấn viên dinh dưỡng"
-                avatar="images/doctor-01.jpg"
             /> */}
         </main>
         </div>
