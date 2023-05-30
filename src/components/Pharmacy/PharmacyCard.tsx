@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import Link from 'next/link';
 
-interface IPharmacyProps {
+export interface IPharmacyData {
     name: string;
     longName: string;
     address: string;
@@ -19,7 +19,7 @@ function PharmacyCard({
     address,
     description,
     image,
-}: IPharmacyProps) {
+}: IPharmacyData) {
     return (
         <Link href={`/pharmacy/${name}`}>
             <div className="mr-4">

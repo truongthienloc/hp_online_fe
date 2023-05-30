@@ -1,4 +1,4 @@
-import PharmacyCard from '~/components/Pharmacy/PharmacyCard';
+import PharmacyCard, { IPharmacyData } from '~/components/Pharmacy/PharmacyCard';
 
 import { GetServerSideProps } from 'next/types';
 import Axios from '~/utils/Axios';
@@ -30,23 +30,15 @@ const Pharmacy = ({ pharmacies }: IPharmaciesData) => {
 };
 export default Pharmacy;
 
-type PharmacityData = {
-    name: string;
-    longName: string;
-    address: string;
-    description: string;
-    image: string;
-};
-
 interface IPharmaciesData {
-    pharmacies: PharmacityData[] | null;
+    pharmacies: IPharmacyData[] | null;
 }
 
 export const getServerSideProps: GetServerSideProps<IPharmaciesData> = async () => {
     try {
         const res = await Axios.get('/get-all-pharmacy');
         console.log(res.data);
-        const data = res.data as PharmacityData[];
+        const data = res.data as IPharmacyData[];
 
         return {
             props: {

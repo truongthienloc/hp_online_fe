@@ -14,6 +14,7 @@ import Axios from '~/utils/Axios';
 import MedicineCard, {
     IMedicineCardProps,
 } from '~/components/Pharmacy/MedicineCard';
+import { IPharmacyData } from '~/components/Pharmacy/PharmacyCard';
 
 const PharmacyDetail = ({ medicines }: IPharmacyDetailProps) => {
     const onSearch = (value: string) => console.log(value);
@@ -73,6 +74,7 @@ export default PharmacyDetail;
 
 interface IPharmacyDetailProps {
     medicines: IMedicineCardProps[] | null;
+    pharmacyInfo: IPharmacyData | null;
 }
 
 export const getServerSideProps: GetServerSideProps<IPharmacyDetailProps> = async (
@@ -80,17 +82,23 @@ export const getServerSideProps: GetServerSideProps<IPharmacyDetailProps> = asyn
 ) => {
     try {
         const pharmacyName = req.query.pharma;
-        console.log('PharmacyName: ', pharmacyName);
 
-        const res = await Axios.get(
+        const resMedicines = await Axios.get(
             `/get-all-medicine-pharmacy?pharmacyName=${pharmacyName}`,
         );
-        const data = res.data as IMedicineCardProps[];
-        console.log('data: ', data);
+        const dataMedicines = resMedicines.data as IMedicineCardProps[];
+
+        const resPharmacies = await Axios.get('/get-all-pharmacy');
+        const dataPharmacies = resPharmacies.data as IPharmacyData[];
+
+        const dataPharmacy = dataPharmacies.find(
+            (value) => value.name === pharmacyName,
+        ) as IPharmacyData | null;
 
         return {
             props: {
-                medicines: data,
+                medicines: dataMedicines,
+                pharmacyInfo: dataPharmacy,
             },
         };
     } catch (err) {
@@ -98,6 +106,7 @@ export const getServerSideProps: GetServerSideProps<IPharmacyDetailProps> = asyn
         return {
             props: {
                 medicines: null,
+                pharmacyInfo: null,
             },
         };
     }
