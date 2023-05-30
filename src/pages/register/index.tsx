@@ -100,9 +100,9 @@ const RegisterPage: NextPageWithLayout = () => {
             className="w-full h-full p-4 pt-8 flex flex-col gap-6"
             onSubmit={handleSubmit(onSubmit)}
         >
-            <img className="h-20 w-20" src="images/Logo HPO.png" alt="Logo HPO" />
-            <h1 className="font-bold text-lg">HEALTHCARE & PHARMACY ONLINE</h1>
-            <h2 className="font-bold text-lg">REGISTER</h2>
+            <div className='flex justify-center'><img className="h-20 w-20" src="images/Logo HPO.png" alt="Logo HPO" /></div>
+            <h1 className="text-center font-bold text-lg">HEALTHCARE & PHARMACY ONLINE</h1>
+            <h2 className="text-center font-bold text-lg">REGISTER</h2>
             <div className="w-full flex flex-col gap-1">
                 <label className="text-gray-600 font-bold" htmlFor={emailId}>
                     EMAIL:
@@ -114,7 +114,7 @@ const RegisterPage: NextPageWithLayout = () => {
                 )}
                 <input
                     {...register('email', { required: 'Enter your email' })}
-                    className="text-base bg-transparent border-b border-black outline-none p-1 focus:border-indigo-900 focus:border-b-2 "
+                    className="opacity-50 focus:opacity-100 duration-150 p-2 px-4 rounded-[24px] flex-1 text-base bg-transparent border-b  outline-none  border-indigo-900 border "
                     type="text"
                     placeholder="Email"
                     id={emailId}
@@ -135,7 +135,7 @@ const RegisterPage: NextPageWithLayout = () => {
                         {...register('password', {
                             required: 'Enter your password',
                         })}
-                        className="flex-1 text-base bg-transparent border-b border-black outline-none p-1 focus:border-indigo-900 focus:border-b-2 "
+                        className="opacity-50 focus:opacity-100 duration-150 p-2 px-4 rounded-[24px] flex-1 text-base bg-transparent border-b  outline-none  border-indigo-900 border "
                         type={hiddenPassword ? 'password' : 'text'}
                         placeholder="Password"
                         id={passwordId}
@@ -168,7 +168,7 @@ const RegisterPage: NextPageWithLayout = () => {
                         {...register('rePassword', {
                             required: 'Enter your re-password',
                         })}
-                        className="flex-1 text-base bg-transparent border-b border-black outline-none p-1 focus:border-indigo-900 focus:border-b-2"
+                        className="opacity-50 focus:opacity-100 duration-150 p-2 px-4 rounded-[24px] flex-1 text-base bg-transparent border-b  outline-none  border-indigo-900 border"
                         type={hiddenRePassword ? 'password' : 'text'}
                         placeholder="Re-password"
                         id={rePasswordId}
@@ -189,7 +189,7 @@ const RegisterPage: NextPageWithLayout = () => {
 
             <button
                 id="submit"
-                className="h-8 rounded font-bold text-white bg-primary flex items-center justify-center"
+                className="h-8 rounded-[24px] font-bold  duration-150 text-white bg-[#91d2d8] flex items-center justify-center"
                 type="submit"
             >
                 SIGNUP
@@ -199,7 +199,7 @@ const RegisterPage: NextPageWithLayout = () => {
                 <span>Have an account.</span>
                 <Link
                     href={'/login'}
-                    className="text-orange-600 hover:text-violet-700"
+                    className="text-orange-600 hover:text-[#91d2d8]"
                 >
                     Login
                 </Link>
