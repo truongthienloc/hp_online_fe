@@ -54,13 +54,6 @@ const LoginPage: NextPageWithLayout = () => {
                 },
             );
 
-            console.log('res: ', res);
-
-            // toast.success('Đăng nhập thành công.', {
-            //     autoClose: 3000,
-            //     pauseOnHover: false,
-            // });
-
             if (res.data.roleID) {
                 // TODO: Navigate to admin page
                 setTimeout(() => {
@@ -74,8 +67,8 @@ const LoginPage: NextPageWithLayout = () => {
                     router.push('/');
                 }, 3000);
             }
-        } catch (error) {
-            // toast.error('Đăng nhập thất bại.');
+        } catch (err) {
+            console.error(err);
         }
     };
 

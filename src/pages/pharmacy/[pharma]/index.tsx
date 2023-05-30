@@ -2,14 +2,11 @@ import { Button, Input, Space } from 'antd';
 import { useRouter } from 'next/router';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 const { Search } = Input;
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Link from 'next/link';
+<<<<<<< HEAD
 import { useState } from 'react';
 import axios from 'axios';
 const AnKhang = () => {
@@ -27,41 +24,25 @@ const AnKhang = () => {
         price: number;
         quantity: number;
     }
+=======
+import { useEffect } from 'react';
 
-    let data: dataType[] = [
-        {
-            name: 'Viên sủi Vitamin C Cali USA giúp tăng đề kháng, giảm mệt mỏi',
-            pathName:
-                'https://cdn.tgdd.vn/Products/Images/11478/299279/vien-sui-vitamin-c-caliusa-tuyp-10-vien-thumb-1-1-200x200.jpg',
-            price: 49000,
-            quantity: 1,
-        },
-        {
-            name: 'Fexophar 60mg trị viêm mũi dị ứng, dị ứng da, nổi mề đay',
-            pathName:
-                'https://cdn.tgdd.vn/Products/Images/10036/225727/fexophar-60mg-h-50vien-thumb-1-1-200x200.jpg',
-            price: 99500,
-            quantity: 1,
-        },
-        {
-            name: 'Pharmekal Spathion White Skin làm trắng da, giảm nám',
-            pathName:
-                'https://cdn.tgdd.vn/Products/Images/7004/130262/vien-uong-spathion-30-vien-1-200x200.jpg',
-            price: 590000,
-            quantity: 1,
-        },
-    ];
-    switch (pharma) {
-        case 'long-chau':
-            namePharma = 'Long Châu';
-            break;
-        case 'pharmacity':
-            namePharma = 'Pharmacity';
-            break;
-        default:
-            namePharma = 'An Khang';
-            break;
-    }
+import { GetServerSideProps } from 'next/types';
+import Axios from '~/utils/Axios';
+
+import MedicineCard, {
+    IMedicineCardProps,
+} from '~/components/Pharmacy/MedicineCard';
+import { IPharmacyData } from '~/components/Pharmacy/PharmacyCard';
+
+const PharmacyDetail = ({ medicines }: IPharmacyDetailProps) => {
+    const onSearch = (value: string) => console.log(value);
+    const router = useRouter();
+    const { pharma } = router.query;
+>>>>>>> 545869955ff5522c62eafd684f71f2c5b7a2c260
+
+    useEffect(() => {}, []);
+
     const notify = () => {
         toast.success('Bạn đã thêm sản phẩm giỏ hàng thành công');
     };
@@ -69,18 +50,10 @@ const AnKhang = () => {
     return (
         <div className="pt-[50px] mb-[250px]  ">
             <div
-                className={
-                    namePharma === 'Long Châu'
-                        ? `px-12 h-[150px] bg-[#17196c] flex items-center justify-between`
-                        : namePharma === 'Pharmacity'
-                        ? `px-12 h-[150px] bg-[#0f61f7] flex items-center justify-between`
-                        : `px-[36px] h-[150px] bg-[#39b647] flex items-center justify-between`
-                }
+                className={`px-12 h-[150px] bg-[#17196c] flex items-center justify-between`}
             >
                 <div className="flex items-center">
-                    <h1 className="text-white text-3xl font-bold">
-                        Nhà thuốc {namePharma}
-                    </h1>
+                    <h1 className="text-white text-3xl font-bold">{pharma}</h1>
                 </div>
                 <div>
                     <Search
@@ -100,56 +73,61 @@ const AnKhang = () => {
                 </div>
             </div>
             <div className="flex flex-wrap justify-center">
-                {data.map((el, index) => {
-                    return (
-                        <div key={index} className="p-[36px]">
-                            <Card sx={{ maxWidth: 300 }}>
-                                <CardActionArea>
-                                    <CardMedia
-                                        className="p-[40px]"
-                                        component="img"
-                                        image={el.pathName}
-                                        alt="green iguana"
-                                    />
-                                    <CardContent>
-                                        <Typography
-                                            gutterBottom
-                                            variant="body1"
-                                            component="div"
-                                        >
-                                            {el.name}
-                                        </Typography>
-                                        <Typography
-                                            variant="body2"
-                                            color="text.secondary"
-                                        >
-                                            Online giá rẻ
-                                        </Typography>
-                                        <Typography
-                                            variant="body2"
-                                            color="text.secondary"
-                                        >
-                                            {el.price}đ/Hộp
-                                        </Typography>
-                                        <div className="flex justify-center">
-                                            <Button
-                                                onClick={(e) => {
-                                                    notify();
-                                                }}
-                                                className="mt-4"
-                                            >
-                                                Thêm vào giỏ hàng
-                                            </Button>
-                                        </div>
-                                    </CardContent>
-                                </CardActionArea>
-                            </Card>
-                        </div>
-                    );
-                })}
+                {medicines &&
+                    medicines.map((value) => (
+                        <MedicineCard
+                            key={value.medicineName}
+                            medicineName={value.medicineName}
+                            description={value.description}
+                            price={value.price}
+                            quantity={value.quantity}
+                            image={value.image}
+                            onAddingCart={notify}
+                        />
+                    ))}
             </div>
             <ToastContainer theme="light" />
         </div>
     );
 };
-export default AnKhang;
+export default PharmacyDetail;
+
+interface IPharmacyDetailProps {
+    medicines: IMedicineCardProps[] | null;
+    pharmacyInfo: IPharmacyData | null;
+}
+
+export const getServerSideProps: GetServerSideProps<IPharmacyDetailProps> = async (
+    req,
+) => {
+    try {
+        const pharmacyName = req.query.pharma;
+
+        const resMedicines = await Axios.get(
+            `/get-all-medicine-pharmacy?pharmacyName=${pharmacyName}`,
+        );
+        const dataMedicines = resMedicines.data as IMedicineCardProps[];
+
+        const resPharmacies = await Axios.get('/get-all-pharmacy');
+        const dataPharmacies = resPharmacies.data as IPharmacyData[];
+
+        const dataPharmacy = dataPharmacies.find(
+            (value) => value.name === pharmacyName,
+        ) as IPharmacyData | null;
+
+        return {
+            props: {
+                medicines: dataMedicines,
+                pharmacyInfo: dataPharmacy,
+            },
+        };
+    } catch (err) {
+        console.log('err: ', err);
+        return {
+            props: {
+                medicines: null,
+                pharmacyInfo: null,
+            },
+        };
+    }
+};
