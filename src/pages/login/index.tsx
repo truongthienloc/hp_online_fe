@@ -42,7 +42,7 @@ const LoginPage: NextPageWithLayout = () => {
     const onSubmit = async (data: FieldValues) => {
         try {
             const res = await toast.promise(
-                Axios.post('/login', data, { withCredentials: true }),
+                Axios.post('/login', data),
                 {
                     pending: 'Đang đăng nhập',
                     success: 'Đăng nhập thành công',
@@ -53,35 +53,22 @@ const LoginPage: NextPageWithLayout = () => {
                     pauseOnHover: false,
                 },
             );
-            
-            console.log('res: ', res.headers['set-cookie']);
 
-            // const test = await fetch('https://onlinehpbe.onrender.com/login', {
-            //     method: 'POST', body: JSON.stringify(data), credentials: 'include',
-            // });
+            if (res.data.roleID) {
+                // TODO: Navigate to admin page
+                setTimeout(() => {
+                    router.push('/users');
+                }, 3000);
+            } else {
+                setCookie('id', res.data.id);
+                // setCookie('token', res.data.token);
 
-            // console.log('test: ', test);
-
-            // toast.success('Đăng nhập thành công.', {
-            //     autoClose: 3000,
-            //     pauseOnHover: false,
-            // });
-
-            // if (res.data.roleID) {
-            //     // TODO: Navigate to admin page
-            //     setTimeout(() => {
-            //         router.push('/users');
-            //     }, 3000);
-            // } else {
-            //     setCookie('id', res.data.id);
-            //     // setCookie('token', res.data.token);
-
-            //     setTimeout(() => {
-            //         router.push('/');
-            //     }, 3000);
-            // }
-        } catch (error) {
-            // toast.error('Đăng nhập thất bại.');
+                setTimeout(() => {
+                    router.push('/');
+                }, 3000);
+            }
+        } catch (err) {
+            console.error(err);
         }
     };
 

@@ -6,9 +6,7 @@ const AllUsers = () => {
             <div className="mb-4">
                 <h2 className="font-bold text-lg">Quản lí thành viên</h2>
             </div>
-            <div>
-                {/* <UserTable /> */}
-            </div>
+            <div>{/* <UserTable /> */}</div>
         </div>
     );
 };
