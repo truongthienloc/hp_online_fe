@@ -1,12 +1,13 @@
 import Link from 'next/link';
 import { getCookies, hasCookie } from 'cookies-next';
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 function Navbar() {
-    // useEffect(() => {
-    //     console.log('cookies: ', getCookies());
-    //     console.log('d cookies: ', document.cookie);
-    // }, [])
+    const [isLogin, setIsLogin] = useState(false);
+
+    useEffect(() => {
+        setIsLogin(hasCookie('id'));
+    }, []);
 
     return (
         <nav className="w-full h-[60px] flex flex-row gap-16 bg-primary fixed shadow z-10">
@@ -29,11 +30,11 @@ function Navbar() {
             <div className="flex-1 flex flex-row justify-end gap-6 items-center">
                 <Link
                     className="hover:bg-[#4261a9] w-8 h-8 flex items-center justify-center rounded-full transition-colors"
-                    href="/search"
+                    href="/booking/search"
                 >
                     <i className="fa fa-search text-white"></i>
                 </Link>
-                {hasCookie('id') ? (
+                {isLogin ? (
                     <Link
                         className="mr-4 bg-white hover:bg-gray-400 w-8 h-8 flex items-center justify-center rounded transition-colors"
                         href="/login"

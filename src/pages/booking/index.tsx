@@ -111,14 +111,14 @@ export const getServerSideProps: GetServerSideProps<
     }
 };
 
-interface IDoctorItemProps {
+export interface IDoctorItemProps {
     id?: string;
     name: string;
     specialist: string;
     avatar: string;
 }
 
-function DoctorItem({ id, name, specialist, avatar }: IDoctorItemProps) {
+export function DoctorItem({ id, name, specialist, avatar }: IDoctorItemProps) {
     const router = useRouter();
 
     const handleClickDetail = () => {
