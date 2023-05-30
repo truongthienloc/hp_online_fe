@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import React, { useEffect, useId, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import { hasCookie } from 'cookies-next';
+import { hasCookie, setCookie } from 'cookies-next';
 import { ToastContainer, toast } from 'react-toastify';
 
 import Axios from '~/utils/Axios';
@@ -27,8 +27,8 @@ const LoginPage: NextPageWithLayout = () => {
     useEffect(() => {
         const submit = document.querySelector('#submit') as HTMLButtonElement;
         const handleEnterPress = (e: KeyboardEvent) => {
-            e.preventDefault();
             if (e.key === 'Enter') {
+                e.preventDefault();
                 submit.click();
             }
         };
@@ -41,31 +41,41 @@ const LoginPage: NextPageWithLayout = () => {
 
     const onSubmit = async (data: FieldValues) => {
         try {
-            const res = await Axios({
-                method: 'post',
-                url: '/login',
-                data: data,
-            });
+            const res = await toast.promise(
+                Axios.post('/login', data),
+                {
+                    pending: 'Đang đăng nhập',
+                    success: 'Đăng nhập thành công',
+                    error: 'Đăng nhập thất bại',
+                },
+                {
+                    autoClose: 3000,
+                    pauseOnHover: false,
+                },
+            );
 
             console.log('res: ', res);
 
-            toast.success('Đăng nhập thành công.', {
-                autoClose: 3000,
-                pauseOnHover: false,
-            });
+            // toast.success('Đăng nhập thành công.', {
+            //     autoClose: 3000,
+            //     pauseOnHover: false,
+            // });
 
-            if (hasCookie('roleID')) {
+            if (res.data.roleID) {
                 // TODO: Navigate to admin page
                 setTimeout(() => {
-                    router.push('/admin');
+                    router.push('/users');
                 }, 3000);
             } else {
+                setCookie('id', res.data.id);
+                // setCookie('token', res.data.token);
+
                 setTimeout(() => {
                     router.push('/');
                 }, 3000);
             }
         } catch (error) {
-            toast.error('Đăng nhập thất bại.');
+            // toast.error('Đăng nhập thất bại.');
         }
     };
 

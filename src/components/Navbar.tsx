@@ -1,17 +1,21 @@
 import Link from 'next/link';
-import { hasCookie } from 'cookies-next';
+import { getCookies, hasCookie } from 'cookies-next';
 import Image from 'next/image';
+import { useEffect } from 'react';
 function Navbar() {
+    // useEffect(() => {
+    //     console.log('cookies: ', getCookies());
+    //     console.log('d cookies: ', document.cookie);
+    // }, [])
+
     return (
         <nav className="w-full h-[60px] flex flex-row gap-16 bg-primary fixed shadow z-10">
             <div className="flex-1 flex justify-center p-1">
                 <Link href="/">
-                    <Image
+                    <img
                         className="h-full hover:scale-125 transition"
                         src="/images/Logo HPO.png"
                         alt="Trang chủ"
-                        width={50}
-                        height={50}
                     />
                 </Link>
             </div>
