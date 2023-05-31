@@ -1,5 +1,7 @@
 import '~/styles/globals.scss';
 import '~/styles/modal.scss';
+import '~/styles/style.scss'
+import '~/styles/beforeafter.scss'
 import 'react-toastify/dist/ReactToastify.css';
 import type { AppPropsWithLayout } from '~/types';
 import DefaultLayout from '~/components/Layouts/DefaultLayout';

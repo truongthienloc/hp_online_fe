@@ -54,12 +54,22 @@ const NewPatientTable: NextPageWithLayout<iProps> = (props) => {
             case 'actions':
                 return (
                     <Row justify="center" align="center">
+                        {props.tabIndex == 0 ? (
+                            <Col css = {{d:'flex',}} className='justify-center'>
+                                <Tooltip 
+                                content = 'Xem thông tin bệnh nhân'
+                                color='default'            
+                                >
+                                    <NewPatientInfor/>
+                                </Tooltip>
+                            </Col>
+                        ): ' '}
                         <Col css={{ d: 'flex' }}>
                             <IconButton>
                                 {props.tabIndex == 0 ? (
-                                    <Button color="success" auto>
-                                        Xác nhận
-                                    </Button>
+                                        <Button className='mx-4' color="success" auto>
+                                            Xác nhận
+                                        </Button>
                                 ) : props.tabIndex === 1 ? (
                                     <NewPatientInfor />
                                 ) : (
@@ -108,7 +118,9 @@ const NewPatientTable: NextPageWithLayout<iProps> = (props) => {
             </Table.Header>
             <Table.Body items={data}>
                 {(item: UserType) => (
-                    <Table.Row>
+                    <Table.Row
+                        key = {item.userID}
+                    >
                         {(columnKey: any) => {
                             return (
                                 <Table.Cell>

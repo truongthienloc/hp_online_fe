@@ -8,7 +8,9 @@ import Introduce from '~/components/Homepage/Introduce';
 import Solutions from '~/components/Homepage/Solutions';
 import DoctorsIntro from '~/components/Homepage/DoctorsIntro';
 import ResultIntro from '~/components/Homepage/ResultIntro';
-
+import DoctorSchedule from '~/components/Homepage/DoctorSchedule';
+import TabSpecialist from '~/components/Homepage/Tabs';
+import BeforeAfter from '~/components/BeforeAfter';
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
@@ -23,7 +25,10 @@ export default function Home() {
             <Introduce />
             <Solutions />
             <ResultIntro />
+            <DoctorSchedule/>
+            <TabSpecialist/>
             <DoctorsIntro />
+            <BeforeAfter/>
         </main>
     );
 }
