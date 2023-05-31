@@ -5,11 +5,26 @@ import { TbNurse } from 'react-icons/tb';
 import { FiUsers } from 'react-icons/fi';
 import { FaUserAlt } from 'react-icons/fa';
 import { useRouter } from 'next/router';
+
+import { getCookie } from 'cookies-next';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+
 const Sidebar = () => {
+    const [roleID, setRoleID] = useState(0);
     const router = useRouter();
     const { category } = router.query;
-    console.log(category);
+
+    useEffect(() => {
+        const cRoleID = getCookie('roleID');
+        if (!cRoleID) {
+            router.push('/login');
+            return;
+        }
+
+        setRoleID(Number(cRoleID));
+    }, []);
+
     return (
         <div className="bg-white w-[15%] px-8 py-12">
             <div>
@@ -47,77 +62,87 @@ const Sidebar = () => {
                                 </div>
                             </Link>
                         </li>
-                        <li className="text-[#546ad8] font-bold mt-4">
-                            ADMIN
-                            <Link href="/users/allUsers">
-                                <div
-                                    className={`py-2 px-4 cursor-pointer rounded text-black mt-4 flex items-center ${
-                                        category === 'allUsers'
-                                            ? 'bg-[#e0f3ff]'
-                                            : 'hover:bg-[#e0f3ff]'
-                                    }`}
-                                >
-                                    <FiUsers />
-                                    <p className="ml-2 text-[14px]">All Users</p>
-                                </div>
-                            </Link>
-                            <Link href="/users/allDoctors">
-                                <div
-                                    className={`py-2 px-4 cursor-pointer rounded text-black mt-4 flex items-center ${
-                                        category === 'allDoctors'
-                                            ? 'bg-[#e0f3ff]'
-                                            : 'hover:bg-[#e0f3ff]'
-                                    }`}
-                                >
-                                    <TbNurse />
-                                    <p className="ml-2 text-[14px]">All Doctors</p>
-                                </div>
-                            </Link>
-                            <Link href="/users/allSupporters">
-                                <div
-                                    className={`py-2 px-4 cursor-pointer rounded text-black mt-4 flex items-center ${
-                                        category === 'allSupporters'
-                                            ? 'bg-[#e0f3ff]'
-                                            : 'hover:bg-[#e0f3ff]'
-                                    }`}
-                                >
-                                    <BiSupport />
-                                    <p className="ml-2 text-[14px]">
-                                        All Supporters
-                                    </p>
-                                </div>
-                            </Link>
-                        </li>
-                        <li className="text-[#546ad8] font-bold mt-4">
-                            DOCTOR
-                            <Link href="/users/Booking">
-                                <div
-                                    className={`py-2 px-4 cursor-pointer rounded text-black mt-4 flex items-center ${
-                                        category === 'Booking'
-                                            ? 'bg-[#e0f3ff]'
-                                            : 'hover:bg-[#e0f3ff]'
-                                    }`}
-                                >
-                                    <AiOutlineSchedule />
-                                    <p className="ml-2 text-[14px]">Booking</p>
-                                </div>
-                            </Link>
-                        </li>
-                        <li className="text-[#546ad8] font-bold mt-4">
-                            SUPPORTER
-                            <Link href="/users/Newpatient">
-                                <div
-                                    className={`py-2 px-4 cursor-pointer rounded text-black mt-4 flex items-center ${
-                                        category === 'Newpatient'
-                                            ? 'bg-[#e0f3ff]'
-                                            : 'hover:bg-[#e0f3ff]'
-                                    }`}
-                                >
-                                    <FaUserAlt />
-                                    <p className="ml-2 text-[14px]">New Patients</p>
-                                </div>
-                            </Link>
-                        </li>
+                        {roleID === 1 && (
+                            <li className="text-[#546ad8] font-bold mt-4">
+                                ADMIN
+                                <Link href="/users/allUsers">
+                                    <div
+                                        className={`py-2 px-4 cursor-pointer rounded text-black mt-4 flex items-center ${
+                                            category === 'allUsers'
+                                                ? 'bg-[#e0f3ff]'
+                                                : 'hover:bg-[#e0f3ff]'
+                                        }`}
+                                    >
+                                        <FiUsers />
+                                        <p className="ml-2 text-[14px]">All Users</p>
+                                    </div>
+                                </Link>
+                                <Link href="/users/allDoctors">
+                                    <div
+                                        className={`py-2 px-4 cursor-pointer rounded text-black mt-4 flex items-center ${
+                                            category === 'allDoctors'
+                                                ? 'bg-[#e0f3ff]'
+                                                : 'hover:bg-[#e0f3ff]'
+                                        }`}
+                                    >
+                                        <TbNurse />
+                                        <p className="ml-2 text-[14px]">
+                                            All Doctors
+                                        </p>
+                                    </div>
+                                </Link>
+                                <Link href="/users/allSupporters">
+                                    <div
+                                        className={`py-2 px-4 cursor-pointer rounded text-black mt-4 flex items-center ${
+                                            category === 'allSupporters'
+                                                ? 'bg-[#e0f3ff]'
+                                                : 'hover:bg-[#e0f3ff]'
+                                        }`}
+                                    >
+                                        <BiSupport />
+                                        <p className="ml-2 text-[14px]">
+                                            All Supporters
+                                        </p>
+                                    </div>
+                                </Link>
+                            </li>
+                        )}
+                        {(roleID === 1 || roleID === 2) && (
+                            <li className="text-[#546ad8] font-bold mt-4">
+                                DOCTOR
+                                <Link href="/users/Booking">
+                                    <div
+                                        className={`py-2 px-4 cursor-pointer rounded text-black mt-4 flex items-center ${
+                                            category === 'Booking'
+                                                ? 'bg-[#e0f3ff]'
+                                                : 'hover:bg-[#e0f3ff]'
+                                        }`}
+                                    >
+                                        <AiOutlineSchedule />
+                                        <p className="ml-2 text-[14px]">Booking</p>
+                                    </div>
+                                </Link>
+                            </li>
+                        )}
+                        {(roleID === 1 || roleID === 3) && (
+                            <li className="text-[#546ad8] font-bold mt-4">
+                                SUPPORTER
+                                <Link href="/users/Newpatient">
+                                    <div
+                                        className={`py-2 px-4 cursor-pointer rounded text-black mt-4 flex items-center ${
+                                            category === 'Newpatient'
+                                                ? 'bg-[#e0f3ff]'
+                                                : 'hover:bg-[#e0f3ff]'
+                                        }`}
+                                    >
+                                        <FaUserAlt />
+                                        <p className="ml-2 text-[14px]">
+                                            New Patients
+                                        </p>
+                                    </div>
+                                </Link>
+                            </li>
+                        )}
                     </ul>
                 </div>
             </div>
