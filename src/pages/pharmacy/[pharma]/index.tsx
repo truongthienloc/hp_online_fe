@@ -23,7 +23,19 @@ const PharmacyDetail = ({ medicines }: IPharmacyDetailProps) => {
 
     useEffect(() => {}, []);
 
-    const notify = () => {
+    const handleAddingCart = (medicine: IMedicineCardProps) => {
+        const { pharmacyName, medicineName } = medicine;
+        const orders = JSON.parse(localStorage.getItem(pharmacyName) || '{}');
+
+        if (orders[medicineName]) {
+            orders[medicineName].quantity += 1;
+        } else {
+            orders[medicineName] = { ...medicine };
+            orders[medicineName].quantity = 1;
+        }
+
+        localStorage.setItem(pharmacyName, JSON.stringify(orders));
+
         toast.success('Bạn đã thêm sản phẩm giỏ hàng thành công');
     };
 
@@ -57,12 +69,15 @@ const PharmacyDetail = ({ medicines }: IPharmacyDetailProps) => {
                     medicines.map((value) => (
                         <MedicineCard
                             key={value.medicineName}
+                            pharmacyName={value.pharmacyName}
                             medicineName={value.medicineName}
                             description={value.description}
                             price={value.price}
                             quantity={value.quantity}
                             image={value.image}
-                            onAddingCart={notify}
+                            onAddingCart={() => {
+                                handleAddingCart(value);
+                            }}
                         />
                     ))}
             </div>

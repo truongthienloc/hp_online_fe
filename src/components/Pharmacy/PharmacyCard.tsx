@@ -10,7 +10,7 @@ export interface IPharmacyData {
     longName: string;
     address: string;
     description?: string;
-    image?: string;
+    avatar?: string;
 }
 
 function PharmacyCard({
@@ -18,7 +18,7 @@ function PharmacyCard({
     longName,
     address,
     description,
-    image,
+    avatar,
 }: IPharmacyData) {
     return (
         <Link href={`/pharmacy/${name}`}>
@@ -28,7 +28,7 @@ function PharmacyCard({
                         <CardMedia
                             className="h-[300px]"
                             component="img"
-                            image={image}
+                            image={avatar}
                             alt={name}
                         />
                         <CardContent>

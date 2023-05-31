@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import React, { useEffect, useId, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import { hasCookie, setCookie } from 'cookies-next';
+import { hasCookie, setCookie, deleteCookie } from 'cookies-next';
 import { ToastContainer, toast } from 'react-toastify';
 
 import Axios from '~/utils/Axios';
@@ -25,6 +25,10 @@ const LoginPage: NextPageWithLayout = () => {
     } = useForm();
 
     useEffect(() => {
+        deleteCookie('id');
+        deleteCookie('roleID');
+        deleteCookie('email');
+
         const submit = document.querySelector('#submit') as HTMLButtonElement;
         const handleEnterPress = (e: KeyboardEvent) => {
             if (e.key === 'Enter') {
@@ -55,13 +59,14 @@ const LoginPage: NextPageWithLayout = () => {
             );
 
             if (res.data.roleID) {
-                // TODO: Navigate to admin page
+                setCookie('email', res.data.email);
+                setCookie('roleID', res.data.roleID);
+
                 setTimeout(() => {
                     router.push('/users');
                 }, 3000);
             } else {
                 setCookie('id', res.data.id);
-                // setCookie('token', res.data.token);
 
                 setTimeout(() => {
                     router.push('/');
@@ -86,8 +91,16 @@ const LoginPage: NextPageWithLayout = () => {
             className="w-full h-full p-4 pt-12 flex flex-col gap-8"
             onSubmit={handleSubmit(onSubmit)}
         >
-            <div className='flex justify-center'><img className="h-20 w-20" src="images/Logo HPO.png" alt="Logo HPO" /></div>
-            <h1 className="text-center font-bold text-lg">HEALTHCARE & PHARMACY ONLINE</h1>
+            <div className="flex justify-center">
+                <img
+                    className="h-20 w-20"
+                    src="images/Logo HPO.png"
+                    alt="Logo HPO"
+                />
+            </div>
+            <h1 className="text-center font-bold text-lg">
+                HEALTHCARE & PHARMACY ONLINE
+            </h1>
             <h2 className="text-center font-bold text-lg">LOGIN</h2>
             <div className="w-full flex flex-col gap-2">
                 <label className="text-gray-600 font-bold" htmlFor={emailId}>
