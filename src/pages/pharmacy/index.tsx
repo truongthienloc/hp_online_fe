@@ -20,7 +20,7 @@ const Pharmacy = ({ pharmacies }: IPharmaciesData) => {
                                 address={value.address}
                                 description={value.description}
                                 longName={value.longName}
-                                image={value.image}
+                                avatar={value.avatar}
                             />
                         ))
                 }

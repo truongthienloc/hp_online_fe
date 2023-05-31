@@ -100,8 +100,16 @@ const RegisterPage: NextPageWithLayout = () => {
             className="w-full h-full p-4 pt-8 flex flex-col gap-6"
             onSubmit={handleSubmit(onSubmit)}
         >
-            <div className='flex justify-center'><img className="h-20 w-20" src="images/Logo HPO.png" alt="Logo HPO" /></div>
-            <h1 className="text-center font-bold text-lg">HEALTHCARE & PHARMACY ONLINE</h1>
+            <div className="flex justify-center">
+                <img
+                    className="h-20 w-20"
+                    src="images/Logo HPO.png"
+                    alt="Logo HPO"
+                />
+            </div>
+            <h1 className="text-center font-bold text-lg">
+                HEALTHCARE & PHARMACY ONLINE
+            </h1>
             <h2 className="text-center font-bold text-lg">REGISTER</h2>
             <div className="w-full flex flex-col gap-1">
                 <label className="text-gray-600 font-bold" htmlFor={emailId}>

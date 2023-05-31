@@ -6,7 +6,7 @@ import { CardActionArea } from '@mui/material';
 import { Button, Input, Space } from 'antd';
 
 export interface IMedicineCardProps {
-    pharmacyName?: string;
+    pharmacyName: string;
     medicineName: string;
     price: number;
     quantity: number;

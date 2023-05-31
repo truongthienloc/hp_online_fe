@@ -6,7 +6,7 @@ const { Search } = Input;
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { GetServerSideProps } from 'next/types';
 import Axios from '~/utils/Axios';
@@ -17,13 +17,54 @@ import MedicineCard, {
 import { IPharmacyData } from '~/components/Pharmacy/PharmacyCard';
 
 const PharmacyDetail = ({ medicines }: IPharmacyDetailProps) => {
-    const onSearch = (value: string) => console.log(value);
+    const [medicinesRender, setMedicinesRender] = useState<IMedicineCardProps[]>([]);
     const router = useRouter();
     const { pharma } = router.query;
 
-    useEffect(() => {}, []);
+    useEffect(() => {
+        setMedicinesRender(medicines || []);
+    }, []);
 
-    const notify = () => {
+    const onSearch = async (value: string) => {
+        if (value === '') {
+            toast.error('Vui lòng không để trống ô tìm kiếm');
+            return;
+        }
+
+        try {
+            const res = await toast.promise(
+                Axios.get(`/search-advanced?pharmacyName=${pharma}&valueSearch=${value}`),
+                {
+                    pending: 'Đang tìm kiếm thuốc phù hợp',
+                    success: 'Đã tìm được thuốc phù hợp',
+                    error: 'Tìm thuốc thất bại',
+                },
+                {
+                    autoClose: 3000,
+                    pauseOnHover: false,
+                },
+            );
+
+            const data = res.data as IMedicineCardProps[];
+            setMedicinesRender(data);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    const handleAddingCart = (medicine: IMedicineCardProps) => {
+        const { pharmacyName, medicineName } = medicine;
+        const orders = JSON.parse(localStorage.getItem(pharmacyName) || '{}');
+
+        if (orders[medicineName]) {
+            orders[medicineName].quantity += 1;
+        } else {
+            orders[medicineName] = { ...medicine };
+            orders[medicineName].quantity = 1;
+        }
+
+        localStorage.setItem(pharmacyName, JSON.stringify(orders));
+
         toast.success('Bạn đã thêm sản phẩm giỏ hàng thành công');
     };
 
@@ -53,16 +94,19 @@ const PharmacyDetail = ({ medicines }: IPharmacyDetailProps) => {
                 </div>
             </div>
             <div className="flex flex-wrap justify-center">
-                {medicines &&
-                    medicines.map((value) => (
+                {medicinesRender &&
+                    medicinesRender.map((value) => (
                         <MedicineCard
                             key={value.medicineName}
+                            pharmacyName={value.pharmacyName}
                             medicineName={value.medicineName}
                             description={value.description}
                             price={value.price}
                             quantity={value.quantity}
                             image={value.image}
-                            onAddingCart={notify}
+                            onAddingCart={() => {
+                                handleAddingCart(value);
+                            }}
                         />
                     ))}
             </div>
