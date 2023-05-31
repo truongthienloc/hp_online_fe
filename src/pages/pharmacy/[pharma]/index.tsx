@@ -33,7 +33,7 @@ const PharmacyDetail = ({ medicines }: IPharmacyDetailProps) => {
 
         try {
             const res = await toast.promise(
-                Axios.get(`/search?pharmacyName=${pharma}&valueSearch=${value}`),
+                Axios.get(`/search-advanced?pharmacyName=${pharma}&valueSearch=${value}`),
                 {
                     pending: 'Đang tìm kiếm thuốc phù hợp',
                     success: 'Đã tìm được thuốc phù hợp',
