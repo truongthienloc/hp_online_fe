@@ -4,7 +4,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { Button, Input, Space } from 'antd';
-
+import {motion} from 'framer-motion'
 export interface IMedicineCardProps {
     pharmacyName: string;
     medicineName: string;
@@ -27,7 +27,12 @@ function MedicineCard({
      * TODO: render quantity (số lượng) và description cho medicine card
      */
     return (
-        <div className="p-[20px]">
+        <motion.div
+            initial = {{opacity:0, scale:0}}
+            animate = {{opacity:1, scale: 1}}
+            transition={{duration: 1, ease: 'easeOut'}}
+        >
+            <div className="p-[20px]">
             <Card className='h-full' sx={{ width: 300 }}>
                 <CardActionArea className='h-full'>
                     <CardMedia
@@ -58,6 +63,7 @@ function MedicineCard({
                 </CardActionArea>
             </Card>
         </div>
+        </motion.div>
     );
 }
 

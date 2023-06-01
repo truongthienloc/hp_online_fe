@@ -26,14 +26,17 @@ function DoctorDetailPage({ data }: { data: IData | null }) {
     const [time, setTime] = useState({ start: '', end: '' });
     const [available, setAvailable] = useState<IAvailable>([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [dataFilter,setDataFilter] = useState<IAvailable>([])
     const router = useRouter();
 
     const getAvailable = async () => {
+        const employeeID = router.query.id
         const res = await Axios.get(
-            `https://onlinehpbe.onrender.com/get-available-time-by-id?employeeID=2`,
+            `https://onlinehpbe.onrender.com/get-available-time-by-id?employeeID=${employeeID}`,
         );
         const resData = res.data;
         setAvailable(resData);
+        setDataFilter(resData.filter((el:any,index:number) => el.date === '18-08-2023'))
     };
 
     useEffect(() => {
@@ -51,6 +54,10 @@ function DoctorDetailPage({ data }: { data: IData | null }) {
 
     const handleChangeDate = (e: ChangeEvent<HTMLSelectElement>) => {
         setDate(e.target.value);
+        const newData = available.filter((el,index) => {
+            return el.date === e.target.value
+        })
+        setDataFilter(newData)
     };
 
     const handleClickTimeButton = (start: string, end: string) => {
@@ -258,19 +265,19 @@ function DoctorDetailPage({ data }: { data: IData | null }) {
                             value={date}
                             onChange={handleChangeDate}
                         >
-                            <option value="26-05-2023">26/05/2023</option>
-                            <option value="27-05-2023">27/05/2023</option>
-                            <option value="28-05-2023">28/05/2023</option>
-                            <option value="29-05-2023">29/05/2023</option>
-                            <option value="30-05-2023">30/05/2023</option>
-                            <option value="01-06-2023">01/06/2023</option>
-                            <option value="02-06-2023">02/06/2023</option>
+                            <option value="18-08-2023">18/08/2023</option>
+                            <option value="19-08-2023">19/08/2023</option>
+                            <option value="20-08-2023">20/08/2023</option>
+                            <option value="21-08-2023">21/08/2023</option>
+                            <option value="22-08-2023">22/08/2023</option>
+                            <option value="23-08-2023">23/08/2023</option>
+                            <option value="24-08-2023">24/08/2023</option>
                         </select>
                     </div>
 
                     <div className="flex flex-row flex-wrap justify-center gap-2 w-full font-semibold text-lg ">
                         {/* TODO: Fetching data (available) and render  */}
-                        {available.map((value) => (
+                        {dataFilter.map((value) => (
                             <TimeButton
                                 key={`${value.date} - ${value.start} - ${value.employeeID}`}
                                 start={value.start}

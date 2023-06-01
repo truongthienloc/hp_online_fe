@@ -113,7 +113,7 @@ const PharmacyDetail = ({ medicines }: IPharmacyDetailProps) => {
                     >
                             <div className='flex items-stretch'>
                             <Search
-                            placeholder="[ADVANCED] Nhập một loại thuốc bạn muốn tìm kiếm..."
+                            placeholder="[ADVANCED] Nhập triệu chứng của bạn..."
                             allowClear
                             size="large"
                             onSearch={onSearch}
