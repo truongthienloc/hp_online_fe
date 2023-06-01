@@ -1,9 +1,9 @@
 import { Table, Row, Col, Tooltip, User, Text, Button } from '@nextui-org/react';
-import { StyledBadge } from '../../components/AdminPage/StyledBadge';
-import { IconButton } from '../../components/AdminPage/IconButton';
-import { DeleteIcon } from '../../components/AdminPage/DeleteIcon';
+import { StyledBadge } from './StyledBadge';
+import { IconButton } from './IconButton';
+import { DeleteIcon } from './DeleteIcon';
 
-import NewPatientInfor from './newpatientmodal';
+import NewPatientInfor from '../../pages/users/newpatientmodal';
 import { NextPage } from 'next';
 import { NextPageWithLayout } from '~/types';
 import Axios from '~/utils/Axios';

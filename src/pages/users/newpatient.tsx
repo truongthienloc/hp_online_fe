@@ -3,7 +3,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import NewPatientTable from './newpatienttable';
+import NewPatientTable from '../../components/AdminPage/newpatienttable';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 

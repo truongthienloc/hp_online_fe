@@ -1,8 +1,8 @@
 import { NextPage } from 'next';
-import Heading from '~/pages/users/heading';
+import Heading from '~/components/AdminPage/heading';
 
 import { LayoutProbs } from '~/types';
-import Sidebar from '../../pages/users/sidebar';
+import Sidebar from '../AdminPage/sidebar';
 
 const AdminLayOut: NextPage<LayoutProbs> = ({ children }: LayoutProbs) => {
     return (
