@@ -19,6 +19,7 @@ type UserType = {
     name: string;
     phone: string;
     email: string;
+    status: 'accepted' | 'canceled'
 };
 function TabPanel(props: TabPanelProps) {
     const { children, value, index, ...other } = props;
@@ -50,14 +51,55 @@ function a11yProps(index: number) {
 const UpdatePatient = () => {
     const [value, setValue] = React.useState(0);
 
-    const [data, setData] = useState<UserType[]>([]);
+    const [dataPending, setDataPending] = useState<UserType[]>([]);
+    const [dataApprove, setDataApprove] = useState<UserType[]>([]);
+    const [dataCancel, setDataCancel] = useState<UserType[]>([]);
     useEffect(() => {
-        const getData = async () => {
-            await axios
+        const getPendingData = async () => {
+            try {
+                await axios
                 .get('https://onlinehpbe.onrender.com/get-pending-users')
-                .then((response) => setData(response.data));
+                .then((response) => {
+                    if(response.data){
+                        setDataPending(response.data)
+                    }
+                });
+            } 
+            catch(err) {
+                console.log(err)
+            }
         };
-        getData();
+        const getApproveData = async () => {
+            try {
+                await axios
+                .get('https://onlinehpbe.onrender.com/get-approve-users')
+                .then((response) => {
+                    if(response.data){
+                        setDataApprove(response.data)
+                    }
+                });
+            } 
+            catch(err) {
+                console.log(err)
+            }
+        }
+        const getCancelData = async () => {
+            try {
+                await axios
+                .get('https://onlinehpbe.onrender.com/get-cancel-users')
+                .then((response) => {
+                    if(response.data){
+                        setDataCancel(response.data)
+                    }
+                });
+            } 
+            catch(err) {
+                console.log(err)
+            }
+        }
+        getPendingData();
+        getApproveData()
+        getCancelData()
     }, []);
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
@@ -81,13 +123,13 @@ const UpdatePatient = () => {
                     </Tabs>
                 </Box>
                 <TabPanel value={value} index={0}>
-                    <NewPatientTable data={data} tabIndex={0} />
+                    <NewPatientTable data={dataPending} tabIndex={0} />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <NewPatientTable data={data} tabIndex={1} />
+                    <NewPatientTable data={dataApprove} tabIndex={1} />
                 </TabPanel>
                 <TabPanel value={value} index={2}>
-                    <NewPatientTable data={data} tabIndex={2} />
+                    <NewPatientTable data={dataCancel} tabIndex={2} />
                 </TabPanel>
             </Box>
         </div>

@@ -2,7 +2,6 @@ import ProductCart from '~/components/ProductCart';
 import { Button, Input } from '@nextui-org/react';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useLocalStorage } from '~/hooks/useLocalStorage';
 
 // let data: any = [];
 

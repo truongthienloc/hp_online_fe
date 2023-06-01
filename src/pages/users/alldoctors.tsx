@@ -1,4 +1,4 @@
-import UserTable from './UserTable';
+import UserTable from '../../components/AdminPage/UserTable';
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
 import axios from 'axios';
 import { useEffect, useState } from 'react';

@@ -85,7 +85,7 @@ function SearchDoctor() {
                 className='w-[50%]'
             >
                 <div className='w-[100%] mt-8'>
-                    <Search suffix = {<Button onClick={handleSendSearching}>Search</Button>} size = "large" bordered = {true} enterButton = {true} id = "search" name = "search" placeholder='Nhập điều gì đó...' onSearch={onSearch}/>
+                    <Search  suffix = {<Button onClick={handleSendSearching}>Search</Button>} size = "large" bordered = {true} enterButton = {true} id = "search" name = "search" placeholder='Nhập điều gì đó...' onSearch={onSearch}/>
                 </div>
             </motion.div>
 

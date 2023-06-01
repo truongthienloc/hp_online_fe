@@ -1,4 +1,4 @@
-import UserTable from './UserTable';
+import UserTable from '../../components/AdminPage/UserTable';
 
 const AllSupporters = () => {
     return (

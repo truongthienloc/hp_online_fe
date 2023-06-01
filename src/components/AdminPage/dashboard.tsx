@@ -1,4 +1,4 @@
-import CardItem from './carditem';
+import CardItem from '../../pages/users/carditem';
 const Dashboard = () => {
     return (
         <div className="flex items-center justify-center">

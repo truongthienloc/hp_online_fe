@@ -5,43 +5,53 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Button } from 'antd';
 import { Space, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-
+import {useState, useEffect} from 'react'
+import Axios from '~/utils/Axios';
+import { CookieValueTypes, getCookie } from 'cookies-next';
 interface DataType {
-    key: string;
-    name: string;
-    age: number;
-    gender: string;
-    time: string;
+    userID:number,
+    start:string,
+    end:string,
+    date:string,
+    type:string,
+    link:string,
+    name:string|null,
+    phone:string|null
 }
 
 const columns: ColumnsType<DataType> = [
     {
         title: 'ID',
         key: 'key',
-        dataIndex: 'key',
+        dataIndex: 'userID',
     },
     {
         title: 'Time',
         key: 'time',
-        dataIndex: 'time',
+        dataIndex: 'date',
+    },
+    {
+        title: 'Start',
+        key: 'time',
+        dataIndex: 'start',
+    },
+    {
+        title: 'End',
+        key: 'time',
+        dataIndex: 'end',
+    },
+    {
+        title: 'Type',
+        key: 'type',
+        dataIndex: 'type',
+    },
+    {
+        title: 'Link',
+        key: 'link',
+        dataIndex: 'link',
+        render: (text) => <a href = {text}>{text}</a>
     },
 
-    {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-        render: (text) => <a>{text}</a>,
-    },
-    {
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age',
-    },
-    {
-        title: 'Gender',
-        dataIndex: 'gender',
-        key: 'gender',
-    },
     {
         title: 'Action',
         key: 'action',
@@ -56,42 +66,37 @@ const columns: ColumnsType<DataType> = [
     },
 ];
 
-const data: DataType[] = [
-    {
-        key: '1',
-        name: 'John Brown',
-        age: 32,
-        gender: 'Male',
-        time: '25/05/2023',
-    },
-    {
-        key: '2',
-        name: 'Jim Green',
-        age: 42,
-        gender: 'Male',
-        time: '25/05/2023',
-    },
-    {
-        key: '3',
-        name: 'Joe Black',
-        age: 32,
-        gender: 'Male',
-        time: '25/05/2023',
-    },
-];
 export default function BasicDatePicker() {
+    const [data,setData] = useState<DataType[]>([])
+    const [employeeID,setEmployeeID] = useState<any>()
+
+    useEffect(() => {
+        const id:any = getCookie('employeeID')
+        setEmployeeID(id)
+        
+    }, [])
+
+    useEffect(() => {
+        const getData = async () => {
+            
+            const res = await Axios.get(`/get-approve-appointment?employeeID=${employeeID}`)
+            setData(res.data)
+        }
+        getData()
+    },[employeeID])
+
     let dateSelected: string = '';
     const [date, setDate] = React.useState<string>('');
 
     const handleDateChange = (data: any) => {
-        dateSelected = `${data.$D}/${
+        dateSelected = `${data.$D}-${
             data.$M + 1 < 10 ? `0${data.$M + 1}` : data.$M
-        }/2023`;
+        }-2023`;
     };
     const handleSearchClick = () => {
         setDate(dateSelected);
     };
-    let newData = data.filter((data) => data.time === date);
+    let newData = data.filter((data) => data.date === date);
     return (
         <div className="p-[80px]">
             <div>

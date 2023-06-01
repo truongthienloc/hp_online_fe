@@ -57,11 +57,11 @@ const LoginPage: NextPageWithLayout = () => {
                     pauseOnHover: false,
                 },
             );
-
+                console.log(res.data)
             if (res.data.roleID) {
+                setCookie('employeeID',res.data.employeeID)
                 setCookie('email', res.data.email);
                 setCookie('roleID', res.data.roleID);
-
                 setTimeout(() => {
                     router.push('/users');
                 }, 3000);
