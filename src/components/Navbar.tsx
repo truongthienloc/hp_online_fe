@@ -10,7 +10,7 @@ function Navbar() {
     }, []);
 
     return (
-        <nav className="w-full h-[60px] flex flex-row gap-16  bg-primary fixed shadow z-10">
+        <nav className="w-full h-[60px] flex flex-row gap-16  bg-primary fixed shadow z-[999]">
             <div className="flex-1 flex justify-center p-1">
                 <Link href="/">
                     <img    

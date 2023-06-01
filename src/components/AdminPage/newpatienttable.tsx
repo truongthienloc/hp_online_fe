@@ -83,6 +83,7 @@ const handleCancel = async (appointmentID:number) => {
             const { data } = props;
             const columns = [
                 { name: 'USERID', uid: 'userID' },
+                { name: 'APPOINTMENTID', uid: 'appointmentID'},
                 { name: 'UPDATEAT', uid: 'updateAt'},
                 { name: 'NAME', uid: 'name' },
                 { name: 'PHONE', uid: 'phone' },
@@ -104,6 +105,16 @@ const handleCancel = async (appointmentID:number) => {
         console.log(columnKey);
         switch (columnKey) {
             case 'id':
+                return (
+                    <Col>
+                        <Row>
+                            <Text b size={14} css={{ tt: 'capitalize' }}>
+                                {cellValue}
+                            </Text>
+                        </Row>
+                    </Col>
+                );
+            case 'appointmentId':
                 return (
                     <Col>
                         <Row>
