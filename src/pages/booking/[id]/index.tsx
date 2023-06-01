@@ -114,7 +114,7 @@ function DoctorDetailPage({ data }: { data: IData | null }) {
     };
     return (
         <main className="min-h-screen flex flex-row pt-14 justify-center">
-            <div className="h-screen mt-1 mb-4 w-[65vw] flex flex-col gap-6 ">
+            <div className=" h-screen mt-1 mb-4 w-[65vw] flex flex-col gap-6 ">
                 <div className="">
                     <motion.div
                         initial = {{opacity:0, x:200}}

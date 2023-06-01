@@ -2,7 +2,7 @@ import { Button, Input, Space } from 'antd';
 import { useRouter } from 'next/router';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 const { Search } = Input;
-
+import {motion} from 'framer-motion'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Link from 'next/link';
@@ -20,7 +20,7 @@ const PharmacyDetail = ({ medicines }: IPharmacyDetailProps) => {
     const [medicinesRender, setMedicinesRender] = useState<IMedicineCardProps[]>([]);
     const router = useRouter();
     const { pharma } = router.query;
-
+    const [visible,setVisible] = useState<boolean>(true)
     useEffect(() => {
         setMedicinesRender(medicines || []);
     }, []);
@@ -51,6 +51,36 @@ const PharmacyDetail = ({ medicines }: IPharmacyDetailProps) => {
             console.error(err);
         }
     };
+    const onNormalSearch = async (value: string) => {
+        if (value === '') {
+            toast.error('Vui lòng không để trống ô tìm kiếm');
+            return;
+        }
+
+        try {
+            const res = await toast.promise(
+                Axios.get(`/search?pharmacyName=${pharma}&valueSearch=${value}`),
+                {
+                    pending: 'Đang tìm kiếm thuốc phù hợp',
+                    success: 'Đã tìm được thuốc phù hợp',
+                    error: 'Tìm thuốc thất bại',
+                },
+                {
+                    autoClose: 3000,
+                    pauseOnHover: false,
+                },
+            );
+
+            const data = res.data as IMedicineCardProps[];
+            setMedicinesRender(data);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    const handleVisible = () => {
+        setVisible(!visible)
+    }
 
     const handleAddingCart = (medicine: IMedicineCardProps) => {
         const { pharmacyName, medicineName } = medicine;
@@ -76,14 +106,42 @@ const PharmacyDetail = ({ medicines }: IPharmacyDetailProps) => {
                     <h1 className="text-white text-3xl font-bold">{pharma}</h1>
                 </div>
                 <div>
-                    <Search
-                        placeholder="Nhập một loại thuốc bạn muốn tìm kiếm..."
-                        allowClear
-                        size="large"
-                        onSearch={onSearch}
-                        className="w-[500px]"
-                        enterButton="Search"
-                    />
+                    {visible && <motion.div
+                        initial = {{opacity:0, y:-200}}
+                        animate = {{opacity:1, y:0}}
+                        transition={{duration: 1}}
+                    >
+                            <div className='flex items-stretch'>
+                            <Search
+                            placeholder="[ADVANCED] Nhập một loại thuốc bạn muốn tìm kiếm..."
+                            allowClear
+                            size="large"
+                            onSearch={onSearch}
+                            className="w-[500px]"
+                            enterButton="Search"
+                            />
+                    </div>
+                        </motion.div>}
+                    {!visible && <motion.div
+                        initial = {{opacity:0, x:-200}}
+                        animate = {{opacity:1, x:0}}
+                        transition={{duration: 1}}
+                    >
+                            <div className=''>
+                                <Search
+                                placeholder="Nhập một loại thuốc bạn muốn tìm kiếm..."
+                                allowClear
+                                size="large"
+                                onSearch={onNormalSearch}
+                                className="w-[500px]"
+                                data-aos="fade-right"
+                                enterButton="Search"
+                                />
+                    </div>
+                        </motion.div>}
+                </div>
+                <div className=''>
+                     <button style={{backgroundColor: `${visible ? 'black' : ''}`}} onClick={handleVisible} className='ml-4 duration-150  p-2 px-4 rounded-md border-2 border-black font-bold text-white'>Advanced Search</button>
                 </div>
                 <div className=" cursor-pointer opacity-30 hover:opacity-100 duration-100 ">
                     <Link className="flex" href={`${pharma}/cart`}>
@@ -92,7 +150,7 @@ const PharmacyDetail = ({ medicines }: IPharmacyDetailProps) => {
                     </Link>
                 </div>
             </div>
-            <div className="flex flex-wrap  items-stretch">
+            <div className="flex flex-wrap  items-stretch justify-center">
                 {medicinesRender &&
                     medicinesRender.map((value) => (
                         <MedicineCard

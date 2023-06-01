@@ -11,7 +11,7 @@ type ModalProps = {
     children: React.ReactNode;
 };
 
-const Modal: React.FC<ModalProps> = ({
+const Modall: React.FC<ModalProps> = ({
     onOk,
     onCancel,
     renderFooter,
@@ -60,7 +60,7 @@ const Modal: React.FC<ModalProps> = ({
     if (isVisible === false) return null;
 
     return (
-        <div className={`tcl-modal__wrapper z-20 ${isVisible ? 'show' : ''}`}>
+        <div className={`z-[99] tcl-modal__wrapper z-20 ${isVisible ? 'show' : ''}`}>
             <div className="tcl-mask" onClick={onCancel}></div>
             <div className="tcl-dialog">
                 <div className="tcl-modal__content">
@@ -86,7 +86,7 @@ const Modal: React.FC<ModalProps> = ({
     );
 };
 
-Modal.defaultProps = {
+Modall.defaultProps = {
     isVisible: false,
     onCancel: () => {},
     onOk: () => {},
@@ -95,4 +95,4 @@ Modal.defaultProps = {
     renderFooter: undefined,
 };
 
-export default Modal;
+export default Modall;
