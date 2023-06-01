@@ -104,7 +104,6 @@ const UpdatePatient = () => {
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
-
     return (
         <div className="p-[80px]">
             <div className="mb-4 font-bold">

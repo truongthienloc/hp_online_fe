@@ -1,8 +1,8 @@
 import { NextPage } from 'next';
-import Heading from '~/pages/users/heading';
+import Heading from '../AdminPage/heading';
 
 import { LayoutProbs } from '~/types';
-import Sidebar from '../../pages/users/sidebar';
+import Sidebar from '../AdminPage/sidebar';
 
 const AdminLayOut: NextPage<LayoutProbs> = ({ children }: LayoutProbs) => {
     return (
@@ -10,7 +10,7 @@ const AdminLayOut: NextPage<LayoutProbs> = ({ children }: LayoutProbs) => {
             <div className="flex min-h-screen">
                 <Sidebar/>
                 <div className="w-[85%]">
-                    <Heading />
+                    <Heading/>
                     <main>{children}</main>
                 </div>
             </div>

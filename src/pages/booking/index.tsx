@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {motion} from 'framer-motion'
+import Axios from '~/utils/Axios';
 function BookingPage({ data }: { data: IData | null }) {
     const doctors = data?.doctors;
     // console.log(data);
@@ -111,9 +112,43 @@ export interface IDoctorItemProps {
     avatar: string;
 }
 
+interface doctorData {
+    id:number,
+    name:string,
+    email:string,
+    address:string,
+    phone:string,
+    specialist: string,
+    gender: string,
+    roleId: number,
+    description: string
+}
+
 export function DoctorItem({ id, name, specialist, avatar }: IDoctorItemProps) {
     const router = useRouter();
+    const emptyData = {
+        id: 0,
+        name: "",
+        email: "",
+        address:"",
+        phone:"",
+        specialist: "",
+        gender: "",
+        roleId: 0,
+        description: ""
+    }
+    const [doctorData,setDoctorData] = useState<doctorData>(emptyData)
+    const getDoctorData = async () => {
+        const res = await Axios.get(
+            `https://onlinehpbe.onrender.com/get-doctor?employeeID=${id}`,
+        );
+        const resData = res.data;
+        setDoctorData(resData)
+    };
 
+    useEffect(() => {
+        getDoctorData();
+    }, []);
     const handleClickDetail = () => {
         if (!id) {
             return;
@@ -123,7 +158,7 @@ export function DoctorItem({ id, name, specialist, avatar }: IDoctorItemProps) {
     };
 
     return (
-        <div className="bg-white flex flex-col justify-center items-center p-4 basis-80 max-w-[580px] flex-grow flex-shrink-0 shadow-lg rounded-lg  gap-2">
+        <div className="bg-white flex flex-col justify-center items-center h-[100%] p-4 basis-80 max-w-[580px] flex-grow flex-shrink-0 shadow-lg rounded-lg  gap-2">
             <div className="">
                 <img
                     className="h-[150px] w-[150px] rounded-[50%]"
@@ -141,18 +176,17 @@ export function DoctorItem({ id, name, specialist, avatar }: IDoctorItemProps) {
             </div>
             <div>
                 <p className="ml-2 text-md opacity-50">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Dolores, molestias sed tenetur sequi consequuntur ullam dolorem
-                    accusamus similique tempore facere omnis nam necessitatibus
-                    quaerat modi, voluptatibus laudantium! Hic, fuga at.
+                    {doctorData.description.length > 200 ? `${doctorData?.description.substring(0,255)}...` : doctorData?.description}
                 </p>
             </div>
-            <button
-                className="w-full rounded-[24px] bg-primary font-semibold text-white p-1"
+            <div className='w-[100%] mt-[auto]'>
+                <button
+                className=" w-[100%] mt-4 rounded-[24px] bg-primary font-semibold text-white p-1"
                 onClick={handleClickDetail}
             >
                 Chi tiết
             </button>
+            </div>
         </div>
     );
 }

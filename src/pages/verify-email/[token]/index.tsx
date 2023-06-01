@@ -31,7 +31,7 @@ const VerifyEmail = () => {
                 <p className="my-4 text-[#797878]">Chúc bạn sẽ có những trải nhiệm thú vị với dịch vụ của chúng tôi</p>
                 <p className="text-[#797878]">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto non suscipit eum ad? Aut delectus, voluptates nihil, laborum praesentium asperiores sunt fugit mollitia iure qui sint sed molestiae quas in.</p>
             </div>
-            <div className="w-[10%] mt-4">
+            <div className="w-[10%] mt-4 relative right-6">
                 <Link href ='/'><Button color="success">Quay trở lại trang chủ</Button></Link>
             </div>
         </div>

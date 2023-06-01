@@ -2,7 +2,7 @@ import { Table, Row, Col, Tooltip, User, Text, Button } from '@nextui-org/react'
 import { StyledBadge } from '../../components/AdminPage/StyledBadge';
 import { IconButton } from '../../components/AdminPage/IconButton';
 import { DeleteIcon } from '../../components/AdminPage/DeleteIcon';
-
+import {useState} from 'react'
 import NewPatientInfor from './newpatientmodal';
 import { NextPage } from 'next';
 import { NextPageWithLayout } from '~/types';
@@ -15,7 +15,7 @@ type UserType = {
     name: string;
     phone: string;
     email: string;
-    status: "accepted" | "canceled"
+    status: "accepted" | "canceled" | "pending"
 };
 
 interface iProps {
@@ -23,8 +23,12 @@ interface iProps {
     data: UserType[];
 }
 
-const handleApprove = async (appointmentID:number) => {
-    console.log(appointmentID)
+
+        
+const NewPatientTable: NextPageWithLayout<iProps> = (props) => {
+
+            const handleApprove = async (appointmentID:number) => {
+    
     try {
         const res = await toast.promise(
                 Axios({
@@ -44,7 +48,6 @@ const handleApprove = async (appointmentID:number) => {
                     pauseOnHover: false,
                 },
             );
-        console.log(res.data)
         }
     catch(err) {
         console.log(err)
@@ -63,41 +66,54 @@ const handleCancel = async (appointmentID:number) => {
                 }),
                 {
                     pending: 'Đang xác nhận',
-                    success: 'Xác nhận thành công',
-                    error: 'Xác nhận thất bại',
+                    success: 'Từ chối thành công',
+                    error: 'Từ chối thất bại',
                 },
                 {
                     autoClose: 3000,
                     pauseOnHover: false,
                 },
-            );
-        console.log(res.data)
-        }
-    catch(err) {
-        console.log(err)
-    }
-}
+                );
 
-const NewPatientTable: NextPageWithLayout<iProps> = (props) => {
-    const { data } = props;
-    const columns = [
-        { name: 'USERID', uid: 'userID' },
-        { name: 'NAME', uid: 'name' },
-        { name: 'PHONE', uid: 'phone' },
-        { name: 'EMAIL', uid: 'email' },
-        { name: 'STATUS', uid: 'status'},
-        { name: 'ACTIONS', uid: 'actions' },
+            }
+            catch(err) {
+                console.log(err)
+            }
+        }
+            const { data } = props;
+            const columns = [
+                { name: 'USERID', uid: 'userID' },
+                { name: 'UPDATEAT', uid: 'updateAt'},
+                { name: 'NAME', uid: 'name' },
+                { name: 'PHONE', uid: 'phone' },
+                { name: 'EMAIL', uid: 'email' },
+                { name: 'STATUS', uid: 'status'},
+                { name: 'ACTIONS', uid: 'actions' },
     ];
+
+
     const renderCell = (user: UserType, columnKey: any) => {
         const cellValue = user[columnKey as keyof typeof user];
         if(props.tabIndex === 1) {
             user['status'] = 'accepted'
         } else if(props.tabIndex === 2){
             user['status'] = 'canceled'
+        } else if(props.tabIndex === 0) {
+            user['status'] = 'pending'
         }
         console.log(columnKey);
         switch (columnKey) {
             case 'id':
+                return (
+                    <Col>
+                        <Row>
+                            <Text b size={14} css={{ tt: 'capitalize' }}>
+                                {cellValue}
+                            </Text>
+                        </Row>
+                    </Col>
+                );
+            case 'updateAt':
                 return (
                     <Col>
                         <Row>
@@ -113,21 +129,11 @@ const NewPatientTable: NextPageWithLayout<iProps> = (props) => {
                     <User squared src="123" name={cellValue} css={{ p: 0 }}></User>
                 );
             case 'status':
-                return <StyledBadge type={props.tabIndex === 1 ? 'active' : 'paused'}>{cellValue}</StyledBadge>;
+                return <StyledBadge type={props.tabIndex === 0  ? 'vacation' : props.tabIndex === 1 ? 'active' : 'paused'}>{cellValue}</StyledBadge>;
 
             case 'actions':
                 return (
                     <Row justify="center" align="center">
-                        {props.tabIndex == 0 ? (
-                            <Col css = {{d:'flex',}} className='justify-center'>
-                                <Tooltip 
-                                content = 'Xem thông tin bệnh nhân'
-                                color='default'            
-                                >
-                                    <NewPatientInfor/>
-                                </Tooltip>
-                            </Col>
-                        ): ' '}
                         <Col css={{ d: 'flex' }}>
                             <IconButton>
                                 {props.tabIndex == 0 ? (
@@ -137,8 +143,11 @@ const NewPatientTable: NextPageWithLayout<iProps> = (props) => {
                                 ) : props.tabIndex === 1 ? (
                                     <NewPatientInfor />
                                 ) : (
-                                    <Button size='sm' color="default">Cancel</Button>
+                                    ''
                                 )}
+                            </IconButton>
+                            <IconButton>
+                                {props.tabIndex == 0 && <Button  onClick={() => handleCancel(user.appointmentID)} color='error'>Từ chối</Button>}
                             </IconButton>
                         </Col>
                     

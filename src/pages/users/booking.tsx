@@ -16,7 +16,8 @@ interface DataType {
     type:string,
     link:string,
     name:string|null,
-    phone:string|null
+    phone:string|null,
+    address:string
 }
 
 const columns: ColumnsType<DataType> = [
@@ -46,7 +47,7 @@ const columns: ColumnsType<DataType> = [
         dataIndex: 'type',
     },
     {
-        title: 'Link',
+        title: 'Link or Address',
         key: 'link',
         dataIndex: 'link',
         render: (text) => <a href = {text}>{text}</a>
@@ -69,7 +70,7 @@ const columns: ColumnsType<DataType> = [
 export default function BasicDatePicker() {
     const [data,setData] = useState<DataType[]>([])
     const [employeeID,setEmployeeID] = useState<any>()
-
+    const [date, setDate] = React.useState<string>('');
     useEffect(() => {
         const id:any = getCookie('employeeID')
         setEmployeeID(id)
@@ -83,20 +84,19 @@ export default function BasicDatePicker() {
             setData(res.data)
         }
         getData()
-    },[employeeID])
+    },[employeeID, date])
 
     let dateSelected: string = '';
-    const [date, setDate] = React.useState<string>('');
 
     const handleDateChange = (data: any) => {
         dateSelected = `${data.$D}-${
             data.$M + 1 < 10 ? `0${data.$M + 1}` : data.$M
         }-2023`;
     };
-    const handleSearchClick = () => {
+    const handleSearchClick = async () => {
         setDate(dateSelected);
     };
-    let newData = data.filter((data) => data.date === date);
+    const newData = data.filter((data) => data.date === date)
     return (
         <div className="p-[80px]">
             <div>
@@ -107,7 +107,7 @@ export default function BasicDatePicker() {
             <div>
                 <p className="text-black">Thời gian: </p>
                 <div className="flex items-center">
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <LocalizationProvider  dateAdapter={AdapterDayjs}>
                         <DatePicker
                             onChange={(value: any) => handleDateChange(value)}
                         />

@@ -11,6 +11,7 @@ import Axios from '~/utils/Axios';
 import { Button, Modal } from 'antd';
 import Modall from '~/components/Modal';
 import {motion} from 'framer-motion'
+import {BsCalendarDate} from 'react-icons/bs'
 type IAvailable = {
     employeeID: string;
     start: string;
@@ -120,126 +121,71 @@ function DoctorDetailPage({ data }: { data: IData | null }) {
         setIsModalOpen(false);
     };
     return (
-        <main className="min-h-screen flex flex-row pt-14 justify-center">
-            <div className=" h-screen mt-1 mb-4 w-[65vw] flex flex-col gap-6 ">
+        <main className=" flex flex-row pt-14 justify-center bg-[#ffffff] h-screen overflow-hidden">
+            <div className=" h-screen mt-1 mb-4 w-[65vw] flex items-center justify-center gap-6 ">
                 <div className="">
-                    <motion.div
-                        initial = {{opacity:0, x:200}}
-                        animate = {{opacity:1, x:0}}
-                        transition = {{duration:1}}
-                    >
                         
-                        <div className="flex justify-center items-center mb-8  py-4">
-                        <div className="w-[40%] flex justify-center">
-                            <img
-                                className="h-[200px] w-[200px] rounded-[50%]"
-                                src={avatar}
-                                alt={name}
-                            />
-                        </div>
-                        <div className=" ml-4 w-[60%] mr-[36px]">
-                            <p className="text-[20px] font-bold">
-                                Hi, i am{' '}
-                                <span className="font-bold text-[24px] text-[#e13740]">
-                                    {name}
-                                </span>
-                            </p>
-                            <p className="">
-                                Chào mừng bạn đến với trang đặt lịch của tôi, hãy
-                                chọn thời gian phù hợp để tôi có thể chữa trị cho bạn
-                                nhé !
-                            </p>
-                            <div className="flex items-center">
-                                <div className="bg-[#e13740] font-bold w-[40%] text-center p-2 mt-2 text-white rounded-[24px] uppercase px-1">
-                                    <p>{specialist}</p>
-                                </div>
-                                <button
-                                    onClick={showModal}
-                                    className="border border-[#004aad] text-black hover:text-white duration-150 hover:bg-[#004aad] font-bold px-4 ml-6 text-center p-2 mt-2  rounded-[24px]"
+                    <div className="flex justify-center items-center mb-8  py-4">
+                            <div className=" ml-4 w-[60%] mr-[36px] text-center">
+                                <motion.div
+                                    initial = {{opacity:0, x:-300}}
+                                    animate = {{opacity:1, x:0}}
+                                    transition={{duration: 1, ease:'linear'}}
                                 >
-                                    ĐẶT LỊCH
-                                </button>
+                                    <div>
+                                    <h3 className='my-4  text-[64px] font-extrabold text-[#3e98bb]'>Dr. {name}</h3>
+                                </div>
+                                <div>
+                                    <p className='text-[#bbc9cc]'>{description.length > 400 ? `${description.substring(0,350)}...` : description}</p>
+                                </div>
+                                <div className='mt-4'>
+                                    <button onClick={showModal} className='border border-[#3e98bb] text-black hover:text-white hover:bg-[#3e98bb] duration-150 font-bold p-2 px-8 focus:bg-[#2c6c86] rounded-[24px]'>Đặt lịch ngay</button>
+                                </div>
+                                </motion.div>
                             </div>
-                        </div>
+                            <motion.div
+                                initial = {{opacity:0, x:300}}
+                                animate = {{opacity:1, x:0}}
+                                transition={{duration:1, ease:'linear'}}
+                            >
+                                <div className="">
+                                <img
+                                    className="shadow-xl h-[400px] w-[400px] rounded-[50%]"
+                                    src={avatar}
+                                    alt={name}
+                                />
+                            </div>
+                            </motion.div>
                     </div>
-                    </motion.div>
                     <motion.div
-                        initial = {{opacity:0, x:-300}}
-                        animate = {{opacity:1, x:0}}
-                        transition={{duration: 1}}
+                        initial = {{opacity:0, y:200}}
+                        animate = {{opacity:1, y: 0}}
+                        transition={{duration: 1, ease:'linear'}}
                     >
-                        <div className="flex justify-center font-bold text-[24px] mb-8">
-                            <h3>DỊCH VỤ</h3>
+                        <div className='w-[full] h-[200px] bg-[#3e98bb] p-8'>
+                        <div className='flex items-center'>
+                            <BsCalendarDate className='text-[48px] text-white'/>
+                            <p className=' ml-4 text-white font-bold'>Thời gian làm việc</p>
                         </div>
-                        <div className="flex justify-center px-[64px] ">
-                        <div>
-                            <div className="flex">
-                                <div className="text-[50px] text-[#b1d4ef]">
-                                    <AiFillClockCircle />
+                        <div className='flex mt-8 justify-between'>
+                            <div className='flex items-center w-[40%] justify-between'>
+                                <div>
+                                    <p className='text-white text-[17px]'>Thứ hai - Thứ sáu</p>
                                 </div>
-                                <div className="ml-4">
-                                    <p className="font-bold text-[18px]">
-                                        Dịch vụ 24/7
-                                    </p>
-                                    <p className="opacity-60 ">
-                                        Cung cấp thời gian hợp lí giữa khách hàng và
-                                        bác sĩ để mang lại trải nghiệm tuyệt vời nhất
-                                        với dịch vụ của chúng tôi...
-                                    </p>
+                                <div className='w-[20px] h-[4px] bg-white'></div>
+                                <div>
+                                    <p className='text-white text-[17px]'>8:00 - 17:00</p>
                                 </div>
                             </div>
-                            <div className="flex items-center my-8">
-                                <div className="text-[50px] text-[#b1d4ef]">
-                                    <GiHealthNormal />
+                            <div className='flex items-center w-[40%] justify-between'>
+                                <div>
+                                    <p className='text-white text-[17px]'>Thứ bảy - Chủ nhật</p>
                                 </div>
-                                <div className="ml-4">
-                                    <p className="font-bold text-[18px]">
-                                        Chuyên môn tốt
-                                    </p>
-                                    <p className="opacity-60 ">
-                                        Những bác sĩ mà chúng tôi cung cấp đến từ các
-                                        bệnh viện lớn trên toàn quốc, sở hữu chuyên
-                                        môn và kĩ năng tốt trong lĩnh vực họ làm
-                                        việc...
-                                    </p>
+                                <div className='w-[20px] h-[4px] bg-white'></div>
+                                <div>
+                                    <p className='text-white text-[17px]'>8:00 - 17:00</p>
                                 </div>
                             </div>
-                            <div className="flex items-center my-8">
-                                <div className="text-[50px] text-[#b1d4ef]">
-                                    <MdLocalPharmacy />
-                                </div>
-                                <div className="ml-4">
-                                    <p className="font-bold text-[18px]">
-                                        Nhà thuốc online
-                                    </p>
-                                    <p className="opacity-60 ">
-                                        Khách hàng có thể đặt mua các loại thuốc từ
-                                        đơn mà bác sĩ đã kê, ngoài ra có thể mua thêm
-                                        nhiều loại thuốc bổ khác...
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="flex items-center">
-                                <div className="text-[50px] text-[#b1d4ef]">
-                                    <AiFillSchedule />
-                                </div>
-                                <div className="ml-4">
-                                    <p className="font-bold text-[18px]">
-                                        Hệ thống đặt lịch khám online
-                                    </p>
-                                    <p className="opacity-60 ">
-                                        Khách hàng có thể trực tiếp trò chuyện với
-                                        bác sĩ mà mình đã đặt một cách riêng tư và có
-                                        thể lựa chọn bác sĩ của riêng mình...
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="w-[50%] ml-4">
-                            <img
-                                className="rounded-lg h-[400px] object-cover"
-                                src={avatar}
-                            />
                         </div>
                     </div>
                     </motion.div>

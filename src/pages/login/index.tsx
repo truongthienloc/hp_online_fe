@@ -62,6 +62,7 @@ const LoginPage: NextPageWithLayout = () => {
                 setCookie('employeeID',res.data.employeeID)
                 setCookie('email', res.data.email);
                 setCookie('roleID', res.data.roleID);
+                setCookie('avatar',res.data.avatar)
                 setTimeout(() => {
                     router.push('/users');
                 }, 3000);

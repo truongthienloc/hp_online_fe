@@ -107,7 +107,7 @@ const PharmacyDetail = ({ medicines }: IPharmacyDetailProps) => {
                 </div>
                 <div>
                     {visible && <motion.div
-                        initial = {{opacity:0, y:-200}}
+                        initial = {{opacity:0, y:200}}
                         animate = {{opacity:1, y:0}}
                         transition={{duration: 1}}
                     >
@@ -143,10 +143,10 @@ const PharmacyDetail = ({ medicines }: IPharmacyDetailProps) => {
                 <div className=''>
                      <button style={{backgroundColor: `${visible ? 'black' : ''}`}} onClick={handleVisible} className='ml-4 duration-150  p-2 px-4 rounded-md border-2 border-black font-bold text-white'>Advanced Search</button>
                 </div>
-                <div className=" cursor-pointer opacity-30 hover:opacity-100 duration-100 ">
+                <div className=" cursor-pointer bg-white duration-100 p-2  rounded-md ">
                     <Link className="flex" href={`${pharma}/cart`}>
-                        <p className="text-lg text-white">Giỏ hàng</p>
-                        <AiOutlineShoppingCart className="ml-2 text-3xl text-white" />
+                        <p className="text-lg text-black">Giỏ hàng</p>
+                        <AiOutlineShoppingCart className="ml-2 text-3xl text-black" />
                     </Link>
                 </div>
             </div>

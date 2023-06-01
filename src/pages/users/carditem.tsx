@@ -14,7 +14,7 @@ const CardItem: NextPage<iProps> = (props) => {
         >
             <div className="mt-4">
                 <h3 className="text-lg font-bold">{heading}</h3>
-                <p>{total}</p>
+                <p className='mt-2'>{total}</p>
             </div>
         </div>
     );

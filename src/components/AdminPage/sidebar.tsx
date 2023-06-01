@@ -14,14 +14,15 @@ const Sidebar = () => {
     const [roleID, setRoleID] = useState(0);
     const router = useRouter();
     const { category } = router.query;
-
+    const [imagePath, setImagePath] = useState<string>("")
     useEffect(() => {
         const cRoleID = getCookie('roleID');
+        const imagePath = getCookie('avatar')
         if (!cRoleID) {
             router.push('/login');
             return;
         }
-
+        setImagePath(String(imagePath))
         setRoleID(Number(cRoleID));
     }, []);
 
@@ -31,7 +32,7 @@ const Sidebar = () => {
                 <div className="rounded-[50%] w-[100px] overflow-hidden m-[auto]">
                     <Image
                         className="h-[100px]"
-                        src="https://t3.ftcdn.net/jpg/02/60/04/08/360_F_260040863_fYxB1SnrzgJ9AOkcT0hoe7IEFtsPiHAD.jpg"
+                        src={imagePath !== 'null' ? imagePath : 'https://www.surfcam.com/images/icons/hexagon/darkblue/MI_DARK_BLUE_ICON_SUPPORT.png'}
                         alt="doctor"
                         width={100}
                         height={100}
@@ -41,7 +42,7 @@ const Sidebar = () => {
                     <p>
                         Xin chào,{' '}
                         <span className="text-[rgba(0,0,255,0.8)] font-bold">
-                            Dr. James
+                            {roleID === 1 ? 'Admin' : roleID === 2 ? 'Doctor' : 'Supporter'}
                         </span>
                     </p>
                 </div>
