@@ -16,12 +16,15 @@ const ProductCart: NextPage<iProps> = (props) => {
     const [productQuantity, setProductQuantity] = useState(quantity);
     const handleMinusClick = () => {
         setQuantity((prevState: number) => {
-            return prevState === 1 ? 1 : prevState - 1;
+            return productQuantity <= 1  ? prevState : prevState - 1;
         });
         setProductQuantity((prevState: number) => {
             return prevState === 1 ? 1 : prevState - 1;
         });
-        setTotalPrice((prevState: number) => prevState - quantity * price);
+        setTotalPrice((prevState: number) => {
+            console.log(productQuantity )
+            return productQuantity <= 1 ? prevState : prevState - quantity * price
+        });
     };
     const handlePlusClick = () => {
         setQuantity((prevState: number) => prevState + 1);

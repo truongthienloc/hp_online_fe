@@ -6,7 +6,7 @@ const BeforeAfter = () => {
         setValue(e.target.value)
     }
   return (
-    <div className='flex flex-col items-center'>
+    <div className='flex flex-col items-center mt-[32px]'data-aos = "fade-left" >
         <div className="mt-16 text-center w-[60%]">
             <h2 className="font-bold text-[24px]">Trước và sau khi sử dụng dịch vụ</h2>
             <p className="text-[18px]">Lorem Ipsum is simply dummy text of the printing and typesetting industry.

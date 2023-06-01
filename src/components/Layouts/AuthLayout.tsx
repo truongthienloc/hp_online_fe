@@ -8,9 +8,9 @@ function AuthLayout({ children }: LayoutProbs) {
         <div className="bg-[#91d2d8]">
             <div className="h-full opacity-30 bg-black z-50 w-full absolute top-0 left-0"></div>
             <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.25 }}
+                initial={{ opacity: 0, x:-200 }}
+    animate={{ opacity: 1, x:0 }}
+    transition={{ duration: 0.75, ease: 'easeOut' }}
             >
                 <div className="min-h-screen flex items-center justify-center">
                     <div

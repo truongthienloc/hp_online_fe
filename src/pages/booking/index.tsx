@@ -1,15 +1,19 @@
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import { useEffect } from 'react';
-
+import {motion} from 'framer-motion'
 function BookingPage({ data }: { data: IData | null }) {
     const doctors = data?.doctors;
-    console.log(data);
     // console.log(data);
 
     return (
         <div>
-            <div className="relative h-[300px] bg-no-repeat bg-center bg-cover  pt-28 bg-[url('https://img.freepik.com/free-vector/doctors-concept-illustration_114360-1515.jpg?w=1060&t=st=1685451472~exp=1685452072~hmac=6db1e58d105e7d2a7d750f46736f8b2dc6a84f26a734cb43dd3e461ef1de12b3')]">
+            <motion.div 
+                initial = {{opacity:0, x:-200}}
+                animate = {{opacity: 1, x:0}}
+                transition = {{duration: .5, ease:'easeInOut'}}
+            >
+                <div className="relative h-[300px] bg-no-repeat bg-center bg-cover  pt-28 bg-[url('https://img.freepik.com/free-vector/doctors-concept-illustration_114360-1515.jpg?w=1060&t=st=1685451472~exp=1685452072~hmac=6db1e58d105e7d2a7d750f46736f8b2dc6a84f26a734cb43dd3e461ef1de12b3')]">
                 <div className=" opacity-70 absolute w-full h-full bg-black top-0 left-0"></div>
                 <div className="flex items-center justify-center mt-8 flex flex-col">
                     <h2 className="text-white text-[24px] font-bold relative z-90">
@@ -19,17 +23,24 @@ function BookingPage({ data }: { data: IData | null }) {
                         Danh sách bác sĩ
                     </h3>
                 </div>
-            </div>
+                </div>
+            </motion.div>
             <main className="bg-[#fefefe] min-h-screen justify-center p-12 pt-28 flex flex-row gap-12 flex-wrap">
                 {/* TODO: Render doctors */}
                 {doctors?.map((doctor) => (
-                    <DoctorItem
+                    <motion.div key = {doctor.id}
+                        initial = {{opacity:0, y:200}}
+                        animate = {{opacity: 1, y:0}}
+                        transition = {{duration: 1, ease:'easeInOut'}}
+                    >
+                        <DoctorItem
                         key={doctor.id}
                         id={doctor.id}
                         name={doctor.name}
                         specialist={doctor.specialist}
                         avatar={doctor.avatar}
-                    />
+                        />
+                    </motion.div>
                 ))}
                 {/* <DoctorItem
                 id="12345"

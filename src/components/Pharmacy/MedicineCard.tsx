@@ -27,16 +27,16 @@ function MedicineCard({
      * TODO: render quantity (số lượng) và description cho medicine card
      */
     return (
-        <div className="p-[36px]">
-            <Card sx={{ maxWidth: 300 }}>
-                <CardActionArea>
+        <div className="p-[20px]">
+            <Card className='h-full' sx={{ width: 300 }}>
+                <CardActionArea className='h-full'>
                     <CardMedia
-                        className="p-[40px]"
+                        className="p-[20px] h-[200px]"
                         component="img"
                         image={image}
                         alt={medicineName}
                     />
-                    <CardContent>
+                    <CardContent className='h-[50%]'>
                         <Typography gutterBottom variant="body1" component="div">
                             {medicineName}
                         </Typography>

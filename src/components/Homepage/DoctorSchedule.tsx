@@ -3,12 +3,12 @@ import {AiFillPhone} from 'react-icons/ai'
 const DoctorSchedule = () => {
   return (
     <div className='flex flex-col items-center h-[700px] mt-[96px] '>
-        <div className='text-center w-[50%]'>
+        <div className='text-center w-[50%]' data-aos = "fade-down" data-aos-duration = "500" >
             <h2 className='font-bold text-[36px]'>Thời gian biểu</h2>
             <p className='mt-4' >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus laboriosam voluptate numquam nihil dolore assumenda dicta. Nemo nobis praesentium exercitationem perferendis, obcaecati ullam minima ratione, quod alias corporis, modi ut!</p>
         </div>
-        <div className='flex mt-4 w-[100%] px-8 items-center'>
-            <div className='w-[60%] px-12'>
+        <div className='flex mt-4 w-[100%] px-8 items-center' >
+            <div className='w-[60%] px-12' data-aos = "fade-right" data-aos-duration = "500">
                 <div>
                     <h3 className='text-[24px] font-bold'>A hospital is a health care institution providing patient treatment with specialized medical</h3>
                     <p className='mt-4 text-[20px]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto itaque neque ex ullam porro dolorem quod asperiores quisquam iure. Amet quam obcaecati enim, tempore non sapiente quisquam assumenda dignissimos eos?</p>
@@ -24,7 +24,7 @@ const DoctorSchedule = () => {
                     </div>
                 </div>
             </div>
-            <div className='ml-4 w-[40%] h-[100%]'>
+            <div className='ml-4 w-[40%] h-[100%]'data-aos = "fade-left" data-aos-duration = "500">
                 <div className='w-[70%]  p-4 border border-[#004aad]'>
                     <div>
                     <p className='font-bold text-[16px] text-[#004aad]'>Weekly Schedule</p>

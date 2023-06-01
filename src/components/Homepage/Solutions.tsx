@@ -1,7 +1,7 @@
 function Solutions() {
     return (
         <div className="w-full h-[80vh]">
-            <div className="flex flex-col gap-[30%] h-full">
+            <div className="flex flex-col gap-[10%] h-full">
                 <div className="w-full flex flex-col items-center">
                     <h2 className="font-bold text-lg">GIẢI PHÁP CỦA CHÚNG TÔI</h2>
                 </div>

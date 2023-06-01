@@ -70,7 +70,7 @@ const TabsSpecialist: React.FC = () => {
 };
 function ItemSpecialist ({name,image}:ItemProps){
     return (
-        <div className='flex items-center mt-12'>
+        <div className='flex items-center mt-12' data-aos = "zoom-in">
             <div className='w-[50%]'>
                 <img src={image}/>
             </div>
@@ -86,7 +86,7 @@ function ItemSpecialist ({name,image}:ItemProps){
 }
 function TabSpecilist({name, Icon, color, BGcolor}:TabsSpecialistProps){
     return(
-        <div style={{backgroundColor: `${BGcolor}`}} className='w-[150px] h-[100px] rounded-md flex flex-col items-center justify-center'>
+        <div style={{backgroundColor: `${BGcolor}`}}  data-aos = "flip-left" className='w-[150px] h-[100px] rounded-md flex flex-col items-center justify-center'>
             <Icon style = {{color: `${color}`}} className='text-white font-bold text-[32px]'/>
             <p className='text-black font-bold text-[16px]'>{name}</p>
         </div>

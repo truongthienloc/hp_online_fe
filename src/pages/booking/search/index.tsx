@@ -1,10 +1,11 @@
 import { DoctorItem, IDoctorItemProps } from '..';
 import { useState, useEffect } from 'react';
-import { Button } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { toast, ToastContainer } from 'react-toastify';
 import Axios from '~/utils/Axios';
-    
+import {motion} from 'framer-motion'
+import {Input, Button} from 'antd'
+const {Search} = Input
 function SearchDoctor() {
     const [doctors, setDoctors] = useState<IDoctorItemProps[]>([]);
 
@@ -55,38 +56,55 @@ function SearchDoctor() {
             console.error('Tìm kiếm bác sĩ không thành công');
         }
     };
-
+    const onSearch = (value:string) => console.log(value)
     return (
-        <main className="min-h-screen w-full flex flex-col pt-24 items-center">
-            <h1 className="w-5/6 font-bold text-3xl text-center">
-                HÃY VIẾT MÔ TẢ VỀ CÁC CHỊU CHỨNG CỦA BẠN TRONG VÀO KHUNG BÊN DƯỚI ĐỂ
-                TÌM KIẾM CÁC BÁC SĨ TỐT NHẤT
-            </h1>
-            <textarea
-                className="w-[700px] h-[200px] mt-6 p-2 border-[2px] border-black rounded font-custom-serif text-xl"
-                name="search"
-                id="search"
-            ></textarea>
-            <div className="flex flex-row w-[700px] justify-end pt-2 font-bold">
-                <Button
-                    className="bg-primary text-white hover:bg-blue-600"
-                    icon={<SearchOutlined />}
-                    onClick={handleSendSearching}
-                >
-                    Search
-                </Button>
+        <div>
+            <motion.div
+                initial={{opacity:0, x:-200}}
+                animate = {{opacity:1, x:0}}
+                transition={{duration:1}}
+            >
+                <div className="relative h-[300px] bg-no-repeat bg-center bg-cover  pt-28 bg-[url('https://img.freepik.com/free-photo/ai-nuclear-energy-background-future-innovation-disruptive-technology_53876-129783.jpg?w=1060&t=st=1685558742~exp=1685559342~hmac=a97b8bc83bafb17511399d5bceda1d5b2de0503ff47e0caf111526d93a7e3d3f')]">
+                <div className=" opacity-70 absolute w-full h-full bg-black top-0 left-0"></div>
+                <div className="flex items-center justify-center mt-8 flex flex-col">
+                    <h2 className="text-white text-[24px] font-bold relative z-90">
+                        HEALTHCARE & PHARMACY ONLINE
+                    </h2>
+                    <h3 className="text-white text-[24px]  relative z-90">
+                        Hệ thống hỗ trợ tìm kiếm bác sĩ
+                    </h3>
+                </div>
             </div>
+            </motion.div>
+            <main className=" w-full flex flex-col  items-center bg-gradient-to-r from-blue-200 to-cyan-200">
+            
+            <motion.div
+                initial={{opacity:0, x:200}}
+                animate = {{opacity:1, x:0}}
+                transition={{duration:1}}
+                className='w-[50%]'
+            >
+                <div className='w-[100%] mt-8'>
+                    <Search suffix = {<Button onClick={handleSendSearching}>Search</Button>} size = "large" bordered = {true} enterButton = {true} id = "search" name = "search" placeholder='Nhập điều gì đó...' onSearch={onSearch}/>
+                </div>
+            </motion.div>
 
-            <div className="mt-4 min-h-[1px] w-full justify-center p-12 pt-28 flex flex-row gap-8 flex-wrap border-t-2 border-black ">
+            <div className="mt-4 min-h-[1px] w-full justify-center p-12 pt-28 flex flex-row gap-8 flex-wrap ">
                 {doctors ? (
                     doctors.map((value) => (
-                        <DoctorItem
-                            key={value.id}
+                        <motion.div key={value.id}
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.5 }}
+                        >
+                            <DoctorItem
+                            
                             id={value.id}
                             name={value.name}
                             avatar={value.avatar}
                             specialist={value.specialist}
-                        />
+                            />
+                        </motion.div>
                     ))
                 ) : (
                     <></>
@@ -105,6 +123,7 @@ function SearchDoctor() {
                 theme="light"
             />
         </main>
+        </div>
     );
 }
 

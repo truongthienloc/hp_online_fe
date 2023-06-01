@@ -4,12 +4,12 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import Link from 'next/link';
-
+import {motion} from 'framer-motion'
 export interface IPharmacyData {
     name: string;
     longName: string;
     address: string;
-    description?: string;
+    description: string;
     avatar?: string;
 }
 
@@ -21,28 +21,34 @@ function PharmacyCard({
     avatar,
 }: IPharmacyData) {
     return (
-        <Link href={`/pharmacy/${name}`}>
+        <motion.div
+            initial = {{opacity:0, x:200}}
+            animate = {{opacity:1, x:0}}
+            transition={{duration:1, ease:'easeOut'}}
+        >
+            <Link href={`/pharmacy/${name}`} >
             <div className="mr-4">
-                <Card sx={{ maxWidth: 345 }}>
-                    <CardActionArea>
+                <Card sx={{ maxWidth: 345 }} className='h-[100%]'>
+                    <CardActionArea className='h-[100%]'>
                         <CardMedia
                             className="h-[300px]"
                             component="img"
                             image={avatar}
                             alt={name}
                         />
-                        <CardContent>
+                        <CardContent className='h-[200px]'>
                             <Typography gutterBottom variant="h5" component="div">
                                 {longName}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                                {description}
+                                {description.length > 300 ? `${description.substring(0,261)}...` : description}
                             </Typography>
                         </CardContent>
                     </CardActionArea>
                 </Card>
             </div>
         </Link>
+        </motion.div>
     );
 }
 

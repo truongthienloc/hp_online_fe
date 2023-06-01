@@ -62,7 +62,6 @@ const PharmacyDetail = ({ medicines }: IPharmacyDetailProps) => {
             orders[medicineName] = { ...medicine };
             orders[medicineName].quantity = 1;
         }
-
         localStorage.setItem(pharmacyName, JSON.stringify(orders));
 
         toast.success('Bạn đã thêm sản phẩm giỏ hàng thành công');
@@ -93,7 +92,7 @@ const PharmacyDetail = ({ medicines }: IPharmacyDetailProps) => {
                     </Link>
                 </div>
             </div>
-            <div className="flex flex-wrap justify-center">
+            <div className="flex flex-wrap  items-stretch">
                 {medicinesRender &&
                     medicinesRender.map((value) => (
                         <MedicineCard

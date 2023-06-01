@@ -14,7 +14,7 @@ import { Navigation, Pagination } from "swiper";
 export default function DoctorsIntro() {
   return (
       <>
-      <div className="mt-16 text-center w-[50%]">
+      <div className="mt-[200px] text-center w-[50%]" data-aos = "fade-down">
         <h2 className="font-bold text-[24px]">Chuyên gia của chúng tôi</h2>
         <p className="text-[18px]">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
             Lorem Ipsum the industry's standard dummy text.</p>
@@ -22,6 +22,7 @@ export default function DoctorsIntro() {
       <Swiper
         slidesPerView={4}
         spaceBetween={30}
+        data-aos = "fade-up"
         // pagination={{
         //   clickable: true,
         // }}

@@ -15,12 +15,12 @@ const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
     useEffect(() => {
-        AOS.init();
+        AOS.init({offset:400});
     }, []);
 
     return (
         <main
-            className={`flex min-h-screen flex-col overflow-auto items-center justify-between p-24 pb-14 ${inter.className}`}
+            className={` bg-white flex min-h-screen flex-col overflow-auto items-center justify-between p-24 pb-14 ${inter.className}`}
         >
             <Introduce />
             <Solutions />

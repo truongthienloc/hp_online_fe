@@ -10,7 +10,7 @@ import { MdLocalPharmacy } from 'react-icons/md';
 import Axios from '~/utils/Axios';
 import { Button, Modal } from 'antd';
 import Modall from '~/components/Modal';
-
+import {motion} from 'framer-motion'
 type IAvailable = {
     employeeID: string;
     start: string;
@@ -116,7 +116,13 @@ function DoctorDetailPage({ data }: { data: IData | null }) {
         <main className="min-h-screen flex flex-row pt-14 justify-center">
             <div className="h-screen mt-1 mb-4 w-[65vw] flex flex-col gap-6 ">
                 <div className="">
-                    <div className="flex justify-center items-center mb-8  py-4">
+                    <motion.div
+                        initial = {{opacity:0, x:200}}
+                        animate = {{opacity:1, x:0}}
+                        transition = {{duration:1}}
+                    >
+                        
+                        <div className="flex justify-center items-center mb-8  py-4">
                         <div className="w-[40%] flex justify-center">
                             <img
                                 className="h-[200px] w-[200px] rounded-[50%]"
@@ -149,10 +155,16 @@ function DoctorDetailPage({ data }: { data: IData | null }) {
                             </div>
                         </div>
                     </div>
-                    <div className="flex justify-center font-bold text-[24px] mb-8">
-                        <h3>DỊCH VỤ</h3>
-                    </div>
-                    <div className="flex justify-center px-[64px] ">
+                    </motion.div>
+                    <motion.div
+                        initial = {{opacity:0, x:-300}}
+                        animate = {{opacity:1, x:0}}
+                        transition={{duration: 1}}
+                    >
+                        <div className="flex justify-center font-bold text-[24px] mb-8">
+                            <h3>DỊCH VỤ</h3>
+                        </div>
+                        <div className="flex justify-center px-[64px] ">
                         <div>
                             <div className="flex">
                                 <div className="text-[50px] text-[#b1d4ef]">
@@ -223,6 +235,7 @@ function DoctorDetailPage({ data }: { data: IData | null }) {
                             />
                         </div>
                     </div>
+                    </motion.div>
                 </div>
             </div>
 

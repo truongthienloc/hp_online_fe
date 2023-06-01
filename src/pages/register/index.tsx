@@ -57,7 +57,7 @@ const RegisterPage: NextPageWithLayout = () => {
                 {
                     pending: 'Đang đăng kí tài khoản',
                     success: 'Đăng kí thành công',
-                    error: 'Đăng nhập thất bại',
+                    error: 'Đăng kí thất bại',
                 },
                 {
                     autoClose: 3000,
