@@ -3,7 +3,7 @@ import { StyledBadge } from '../../components/AdminPage/StyledBadge';
 import { IconButton } from '../../components/AdminPage/IconButton';
 import { DeleteIcon } from '../../components/AdminPage/DeleteIcon';
 import {useState} from 'react'
-import NewPatientInfor from '../../components/AdminPage/newpatientmodal';
+import NewPatientInfor from './newpatientmodal';
 import { NextPage } from 'next';
 import { NextPageWithLayout } from '~/types';
 import Axios from '~/utils/Axios';
