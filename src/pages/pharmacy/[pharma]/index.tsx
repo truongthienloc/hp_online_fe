@@ -19,7 +19,7 @@ import { IPharmacyData } from '~/components/Pharmacy/PharmacyCard';
 const PharmacyDetail = ({ medicines }: IPharmacyDetailProps) => {
     const [medicinesRender, setMedicinesRender] = useState<IMedicineCardProps[]>([]);
     const router = useRouter();
-    const { pharma } = router.query;
+    const { pharma } = router.query as { pharma: string };
     const [visible,setVisible] = useState<boolean>(true)
     useEffect(() => {
         setMedicinesRender(medicines || []);
@@ -46,6 +46,8 @@ const PharmacyDetail = ({ medicines }: IPharmacyDetailProps) => {
             );
 
             const data = res.data as IMedicineCardProps[];
+
+            // console.log("data: ", data);
             setMedicinesRender(data);
         } catch (err) {
             console.error(err);
@@ -72,6 +74,7 @@ const PharmacyDetail = ({ medicines }: IPharmacyDetailProps) => {
             );
 
             const data = res.data as IMedicineCardProps[];
+            
             setMedicinesRender(data);
         } catch (err) {
             console.error(err);
@@ -83,8 +86,8 @@ const PharmacyDetail = ({ medicines }: IPharmacyDetailProps) => {
     }
 
     const handleAddingCart = (medicine: IMedicineCardProps) => {
-        const { pharmacyName, medicineName } = medicine;
-        const orders = JSON.parse(localStorage.getItem(pharmacyName) || '{}');
+        const { medicineName } = medicine;
+        const orders = JSON.parse(localStorage.getItem(pharma) || '{}');
 
         if (orders[medicineName]) {
             orders[medicineName].quantity += 1;
@@ -92,7 +95,7 @@ const PharmacyDetail = ({ medicines }: IPharmacyDetailProps) => {
             orders[medicineName] = { ...medicine };
             orders[medicineName].quantity = 1;
         }
-        localStorage.setItem(pharmacyName, JSON.stringify(orders));
+        localStorage.setItem(pharma, JSON.stringify(orders));
 
         toast.success('Bạn đã thêm sản phẩm giỏ hàng thành công');
     };

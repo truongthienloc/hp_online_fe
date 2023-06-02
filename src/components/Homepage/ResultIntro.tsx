@@ -39,7 +39,7 @@ function Result({ title, result }: IResultProps) {
     const [value,setValue] = useState<number>(0)
     const interval = 5000
     const duration = Math.floor(interval / result)
-    console.log(result)
+    // console.log(result)
     useEffect(() => {
         const interval = setInterval(() => {
       if (value === result) {

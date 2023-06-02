@@ -11,7 +11,7 @@ import {FaClinicMedical} from 'react-icons/fa'
 import {BiBrain} from 'react-icons/bi'
 import clsx from 'clsx';
 const onChange = (key: string) => {
-    console.log(key);
+    // console.log(key);
 };
 
 const items: TabsProps['items'] = [
