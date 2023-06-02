@@ -111,10 +111,10 @@ const Sidebar = () => {
                         {(roleID === 1 || roleID === 2) && (
                             <li className="text-[#546ad8] font-bold mt-4">
                                 DOCTOR
-                                <Link href="/users/Booking">
+                                <Link href="/users/booking">
                                     <div
                                         className={`py-2 px-4 cursor-pointer rounded text-black mt-4 flex items-center ${
-                                            category === 'Booking'
+                                            category === 'booking'
                                                 ? 'bg-[#e0f3ff]'
                                                 : 'hover:bg-[#e0f3ff]'
                                         }`}
@@ -128,10 +128,10 @@ const Sidebar = () => {
                         {(roleID === 1 || roleID === 3) && (
                             <li className="text-[#546ad8] font-bold mt-4">
                                 SUPPORTER
-                                <Link href="/users/Newpatient">
+                                <Link href="/users/newpatient">
                                     <div
                                         className={`py-2 px-4 cursor-pointer rounded text-black mt-4 flex items-center ${
-                                            category === 'Newpatient'
+                                            category === 'newpatient'
                                                 ? 'bg-[#e0f3ff]'
                                                 : 'hover:bg-[#e0f3ff]'
                                         }`}

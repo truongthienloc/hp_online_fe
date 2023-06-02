@@ -28,8 +28,8 @@ const VerifyEmail = () => {
             </div>
             <div className="w-[50%] text-center">
                 <h2 className="font-bold mt-4 text-[24px]">Cảm ơn bạn đã xác nhận email</h2>
-                <p className="my-4 text-[#797878]">Chúc bạn sẽ có những trải nhiệm thú vị với dịch vụ của chúng tôi</p>
-                <p className="text-[#797878]">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto non suscipit eum ad? Aut delectus, voluptates nihil, laborum praesentium asperiores sunt fugit mollitia iure qui sint sed molestiae quas in.</p>
+                <p className="my-4 text-[#797878]">Xin gửi lời cảm ơn chân thành đối với bạn vì đã xác thực địa chỉ email của tôi. Điều này không chỉ cho tôi cảm giác an tâm và tin tưởng vào dịch vụ của bạn, mà còn chứng tỏ sự tận tâm và chuyên nghiệp của đội ngũ hỗ trợ khách hàng của Healthcare & Pharmacy Online.</p>
+                <p className="text-[#797878]">Chúc bạn có có những trải nghiệm tuyệt vời với dịch vụ mà chúng tôi mang lại</p>
             </div>
             <div className="w-[10%] mt-4 relative right-6">
                 <Link href ='/'><Button color="success">Quay trở lại trang chủ</Button></Link>

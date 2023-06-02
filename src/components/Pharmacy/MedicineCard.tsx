@@ -33,13 +33,14 @@ function MedicineCard({
             transition={{duration: 1, ease: 'easeOut'}}
         >
             <div className="p-[20px]">
-            <Card className='h-full' sx={{ width: 300 }}>
+            <Card className='h-[400px]' sx={{ width: 300 }}>
                 <CardActionArea className='h-full'>
                     <CardMedia
                         className="p-[20px] h-[200px]"
                         component="img"
                         image={image}
                         alt={medicineName}
+                        height='200'
                     />
                     <CardContent className='h-[50%]'>
                         <Typography gutterBottom variant="body1" component="div">
@@ -51,10 +52,10 @@ function MedicineCard({
                         <Typography variant="body2" color="text.secondary">
                             {price}đ/Hộp
                         </Typography>
-                        <div className="flex justify-center">
+                        <div className="mt-[48px] flex justify-center ">
                             <Button
                                 onClick={(e) => onAddingCart && onAddingCart()}
-                                className="mt-4"
+                                className=""
                             >
                                 Thêm vào giỏ hàng
                             </Button>
