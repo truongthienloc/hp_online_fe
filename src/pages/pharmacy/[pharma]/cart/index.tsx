@@ -2,6 +2,8 @@ import ProductCart from '~/components/ProductCart';
 import { Button, Input } from '@nextui-org/react';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { ToastContainer, toast } from 'react-toastify';
+import { Toast } from 'react-toastify/dist/components';
 
 // let data: any = [];
 
@@ -36,7 +38,7 @@ const Cart = () => {
         setToTalPrice(initialPrice)
         setQuantity(initialLength)
     }, [data.length])
-
+    const onClick = () => toast.success('Bạn đã đặt hàng thành công, vui lòng đợi trong vài ngày.')
     return (
         <div className="bg-[#f0f0f0] pt-[80px] flex justify-center">
             <div className="w-[400px] bg-white mb-[40px] shadow-lg rounded p-4">
@@ -84,15 +86,16 @@ const Cart = () => {
                     <div className="mt-2 flex justify-between">
                         <span>Tổng tiền:</span>
                         <span className="font-bold text-[#17c964]" suppressHydrationWarning>
-                            {totalPrice || 400000}
+                            {totalPrice} đ 
                         </span>
                     </div>
                 </div>
                 <div className="mt-4 text-center flex ">
-                    <Button shadow className="flex-1" color="success">
+                    <Button onClick={onClick} shadow className="flex-1" color="success">
                         ĐẶT HÀNG
                     </Button>
                 </div>
+                <ToastContainer className='mt-12'/>
             </div>
         </div>
     );

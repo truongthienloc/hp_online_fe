@@ -105,10 +105,10 @@ const PharmacyDetail = ({ medicines }: IPharmacyDetailProps) => {
                 <div className="flex items-center">
                     <h1 className="text-white text-3xl font-bold">{pharma}</h1>
                 </div>
-                <div>
+                <div className='mt-8'>
                     {visible && <motion.div
-                        initial = {{opacity:0, y:200}}
-                        animate = {{opacity:1, y:0}}
+                        initial = {{opacity:0, x:200}}
+                        animate = {{opacity:1, x:0}}
                         transition={{duration: 1}}
                     >
                             <div className='flex items-stretch'>
@@ -120,28 +120,28 @@ const PharmacyDetail = ({ medicines }: IPharmacyDetailProps) => {
                             className="w-[500px]"
                             enterButton="Search"
                             />
-                    </div>
+                            </div>
                         </motion.div>}
-                    {!visible && <motion.div
-                        initial = {{opacity:0, x:-200}}
-                        animate = {{opacity:1, x:0}}
-                        transition={{duration: 1}}
-                    >
+                            {!visible && <motion.div
+                                initial = {{opacity:0, x:-200}}
+                                animate = {{opacity:1, x:0}}
+                                transition={{duration: 1}}
+                            >
                             <div className=''>
-                                <Search
-                                placeholder="Nhập một loại thuốc bạn muốn tìm kiếm..."
-                                allowClear
-                                size="large"
-                                onSearch={onNormalSearch}
-                                className="w-[500px]"
-                                data-aos="fade-right"
-                                enterButton="Search"
-                                />
-                    </div>
-                        </motion.div>}
-                </div>
-                <div className=''>
+                                        <Search
+                                        placeholder="Nhập một loại thuốc bạn muốn tìm kiếm..."
+                                        allowClear
+                                        size="large"
+                                        onSearch={onNormalSearch}
+                                        className="w-[500px]"
+                                        data-aos="fade-right"
+                                        enterButton="Search"
+                                        />
+                            </div>
+                            </motion.div>}
+                <div className='mt-4 flex justify-center'>
                      <button style={{backgroundColor: `${visible ? 'black' : ''}`}} onClick={handleVisible} className='ml-4 duration-150  p-2 px-4 rounded-md border-2 border-black font-bold text-white'>Advanced Search</button>
+                </div>
                 </div>
                 <div className=" cursor-pointer bg-white duration-100 p-2  rounded-md ">
                     <Link className="flex" href={`${pharma}/cart`}>

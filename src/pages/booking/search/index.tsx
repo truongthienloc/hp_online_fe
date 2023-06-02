@@ -76,7 +76,7 @@ function SearchDoctor() {
                 </div>
             </div>
             </motion.div>
-            <main className=" min-h-screen w-full flex flex-col  items-center bg-gradient-to-r from-blue-200 to-cyan-200">
+            <main className="  min-h-screen w-full flex flex-col  items-center bg-gradient-to-r from-blue-200 to-cyan-200">
             
             <motion.div
                 initial={{opacity:0, x:200}}
@@ -89,7 +89,7 @@ function SearchDoctor() {
                 </div>
             </motion.div>
 
-            <div className="mt-4 h-[400px] w-full justify-center p-12 pt-28 flex flex-row gap-8 flex-wrap ">
+            <div className="mt-4  w-full justify-center p-12 pt-28 flex flex-row gap-8 flex-wrap ">
                 {doctors ? (
                     doctors.map((value) => (
                         <motion.div key={value.id}
