@@ -35,15 +35,11 @@ function AuthLayout({ children }: LayoutProbs) {
                                     style['auth-intro__info'],
                                 )}
                             >
-                                <h1 className="font-bold">
-                                    WELCOME TO HEALTHCARE & PHARMACY ONLINE
+                                <h1 className="font-bold text-[18px]">
+                                    Chào mừng đến với Healthcare & Pharmacy Online
                                 </h1>
                                 <p className="text-[16px]">
-                                    Lorem ipsum dolor sit amet consectetur
-                                    adipisicing elit. Eos eum possimus illum omnis
-                                    inventore. Eos aperiam consectetur facere. Alias
-                                    ducimus voluptate laudantium numquam laboriosam
-                                    doloribus, ad sit sint molestias autem
+                                    Healthcare & Pharmacy Online là một dự án nhỏ được tạo ra nhằm kịp thời giải quyết tình trạng "lười" đến bệnh viện của đại đa số giới trẻ bây giờ, Website cung cấp các chức năng đặt lịch, đặt thuốc, video meeting với bác sĩ trực tiếp...
                                 </p>
                             </div>
                         </div>

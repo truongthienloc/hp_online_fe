@@ -165,12 +165,12 @@ const LoginPage: NextPageWithLayout = () => {
             </button>
 
             <div className="flex flex-row justify-center gap-2">
-                <span>Dont have an account?</span>
+                <span>Nếu không có tài khoản?</span>
                 <Link
                     href={'/register'}
                     className="text-orange-600 hover:text-[#91d2d8]"
                 >
-                    Register now
+                    Đăng kí ngay
                 </Link>
             </div>
 
