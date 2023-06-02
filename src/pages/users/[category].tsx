@@ -3,14 +3,16 @@ import { useRouter } from 'next/router';
 import AllUsers from './allusers';
 import AllDoctors from './alldoctors';
 import AllSupporters from './allsupporters';
-import Booking from './booking';
-import UpdatePatient from './newpatient';
+
+import BasicDatePicker from '../../components/AdminPage/booking';
 import { NextPageWithLayout } from '~/types';
 import AdminLayOut from '~/components/Layouts/AdminLayout';
 import Dashboard from '~/components/AdminPage/dashboard';
+import UpdatePatient from '../../components/AdminPage/newpatient';
 const Category: NextPageWithLayout = () => {
     const router = useRouter();
     const { category } = router.query;
+    console.log(category)
     return (
         <div>
             {!category ? (
@@ -21,10 +23,10 @@ const Category: NextPageWithLayout = () => {
                 <AllDoctors />
             ) : category === 'allSupporters' ? (
                 <AllSupporters />
-            ) : category === 'Booking' ? (
-                <Booking />
-            ) : category === 'Newpatient' ? (
-                <UpdatePatient />
+            ) : category === 'booking' ? (
+                <BasicDatePicker/>
+            ) : category === 'newpatient' ? (
+                <UpdatePatient/>
             ) : (
                 ''
             )}

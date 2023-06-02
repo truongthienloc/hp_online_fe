@@ -84,7 +84,6 @@ const handleCancel = async (appointmentID:number) => {
             const columns = [
                 { name: 'USERID', uid: 'userID' },
                 { name: 'APPOINTMENTID', uid: 'appointmentID'},
-                { name: 'UPDATEAT', uid: 'updateAt'},
                 { name: 'NAME', uid: 'name' },
                 { name: 'PHONE', uid: 'phone' },
                 { name: 'EMAIL', uid: 'email' },
@@ -115,16 +114,6 @@ const handleCancel = async (appointmentID:number) => {
                     </Col>
                 );
             case 'appointmentId':
-                return (
-                    <Col>
-                        <Row>
-                            <Text b size={14} css={{ tt: 'capitalize' }}>
-                                {cellValue}
-                            </Text>
-                        </Row>
-                    </Col>
-                );
-            case 'updateAt':
                 return (
                     <Col>
                         <Row>
